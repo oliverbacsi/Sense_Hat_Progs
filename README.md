@@ -1,4 +1,5 @@
 # Raspberry Pi Sense Hat Progs
+
 > Games and Tools for Raspberry Pi Sense Hat
 > You need a Raspberry PI Single Board Computer
 > equipped with a "Sense Hat" Board to run these programs.
@@ -6,17 +7,21 @@
 ---
 
 ###Starry Night 1
+
 Emulates a starry night screen.
 Background is a somewhat-flickering dark blue pattern.
 Colorful shiny stars pop up randomly and later also extinct randomly.
 
 ###Starry Night 2
+
 Similar to Starry Night 1, but the colorful stars poppig up are "Supernovas", so they appear bright and then slowly fade away during their existence until they completely disappear in the background.
 
 ###Air Data
+
 Display Temperature, Humidity and Air Pressure as different color scrolling texts on the 8x8 dot matrix screen.
 
 ###Sense Hat Maze
+
 Find Your way to the Exit of the Maze, collecting all 3 necessary keys to open the Exit door.
 
 ![Screenshot-Maze](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/scrot-Maze.png)
@@ -41,9 +46,11 @@ Until You don't have all the keys the radar will only show You the closest key n
 ###TODO:
 
 ####Compass
+
 Display a proper compass utilizing the magnetometer sensor of the Sense Hat.
 
 ####Reversi
+
 Play a reversi game on the 8x8 LED matrix screen against the computer
 
 
