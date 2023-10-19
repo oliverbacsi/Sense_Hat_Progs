@@ -27,7 +27,7 @@ def other(color :int):
 #################### CLASS PART ####################
 
 
-class Move():
+class Move :
     """
     Class representating a move: One token placed, the rest flipped
     """
@@ -39,7 +39,7 @@ class Move():
         self.flipped.extend(list_moves)
 
 
-class Board():
+class Board :
     """
     Class representating the reversi board in memory
     """
@@ -282,11 +282,11 @@ while not reversi.is_game_over():
 
 #Announce game results
 NumBlack = 0 ; NumWhite = 0
-for i in range(8):
-    for j in range(8):
-        if reversi.b[i][j] == 1 :
+for k in range(8):
+    for l in range(8):
+        if reversi.b[k][l] == 1 :
             NumBlack += 1
-        elif reversi.b[i][j] == -1 :
+        elif reversi.b[k][l] == -1 :
             NumWhite += 1
 
 if NumBlack > NumWhite :

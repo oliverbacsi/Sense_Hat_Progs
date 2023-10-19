@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage no-websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients no-cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers no-applicationcache svg inlinesvg smil svgclippaths" lang="en" style=""><!--<![endif]--><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="David Honess">
+  <link rel="shortcut icon" href="https://pythonhosted.org/sense-hat/img/favicon.ico">
+  <title>API Reference - Sense HAT</title>
+  <link href="API%20Reference%20-%20Sense%20HAT_files/css.css" rel="stylesheet" type="text/css">
+
+  <link rel="stylesheet" href="API%20Reference%20-%20Sense%20HAT_files/theme.css" type="text/css">
+  <link rel="stylesheet" href="API%20Reference%20-%20Sense%20HAT_files/theme_extra.css" type="text/css">
+  <link rel="stylesheet" href="API%20Reference%20-%20Sense%20HAT_files/highlight.css">
+  
+  <script async="" src="API%20Reference%20-%20Sense%20HAT_files/analytics.js"></script><script>
+    // Current page data
+    var mkdocs_page_name = "API Reference";
+    var mkdocs_page_input_path = "api.md";
+    var mkdocs_page_url = "/api/";
+  </script>
+  
+  <script src="API%20Reference%20-%20Sense%20HAT_files/jquery-2.1.1.min.js"></script>
+  <script src="API%20Reference%20-%20Sense%20HAT_files/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="API%20Reference%20-%20Sense%20HAT_files/highlight.pack.js"></script> 
+  
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-46270871-5', 'pythonhosted.org/sense-hat');
+      ga('send', 'pageview');
+  </script>
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="https://pythonhosted.org/sense-hat/" class="icon icon-home"> Sense HAT</a>
+        <div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs">
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="https://pythonhosted.org/sense-hat/">Home</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="https://pythonhosted.org/sense-hat/api/">API Reference</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#sense-hat-api-reference">Sense HAT API Reference</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#led-matrix">LED Matrix</a></li>
+        
+            <li><a class="toctree-l3" href="#environmental-sensors">Environmental sensors</a></li>
+        
+            <li><a class="toctree-l3" href="#imu-sensor">IMU Sensor</a></li>
+        
+            <li><a class="toctree-l3" href="#joystick">Joystick</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="https://pythonhosted.org/sense-hat/changelog/">Changelog</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="https://pythonhosted.org/sense-hat/">Sense HAT</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="https://pythonhosted.org/sense-hat/">Docs</a> »</li>
+    
+      
+    
+    <li>API Reference</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/RPi-Distro/python-sense-hat/edit/master/docs/api.md" class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="sense-hat-api-reference">Sense HAT API Reference</h1>
+<h2 id="led-matrix">LED Matrix</h2>
+<h3 id="set_rotation">set_rotation</h3>
+<p>If you're using the Pi upside down or sideways you can use this function to correct the orientation of the image being shown.</p>
+<table class="docutils">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Valid values</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>r</code></td>
+<td>Integer</td>
+<td><code>0</code> <code>90</code> <code>180</code> <code>270</code></td>
+<td>The angle to rotate the LED matrix though. <code>0</code> is with the Raspberry Pi HDMI port facing downwards.</td>
+</tr>
+<tr>
+<td><code>redraw</code></td>
+<td>Boolean</td>
+<td><code>True</code> <code>False</code></td>
+<td>Whether or not to redraw what is already being displayed on the LED matrix. Defaults to <code>True</code></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils">
+<thead>
+<tr>
+<th>Returned type</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>None</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python hljs"><span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+
+sense = SenseHat()
+sense.set_rotation(<span class="hljs-number">180</span>)
+<span class="hljs-comment"># alternatives</span>
+sense.rotation = <span class="hljs-number">180</span>
+</code></pre>
+
+<hr>
+<h3 id="flip_h">flip_h</h3>
+<p>Flips the image on the LED matrix horizontally.</p>
+<table class="docutils">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Valid values</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>redraw</code></td>
+<td>Boolean</td>
+<td><code>True</code> <code>False</code></td>
+<td>Whether or not to redraw what is already being displayed on the LED matrix. Defaults to <code>True</code></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils">
+<thead>
+<tr>
+<th>Returned type</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>List</td>
+<td>A list containing 64 smaller lists of <code>[R, G, B]</code> pixels (red, green, blue) representing the flipped image.</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python hljs"><span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+
+sense = SenseHat()
+sense.flip_h()
+</code></pre>
+
+<hr>
+<h3 id="flip_v">flip_v</h3>
+<p>Flips the image on the LED matrix vertically.</p>
+<table class="docutils">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Valid values</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>redraw</code></td>
+<td>Boolean</td>
+<td><code>True</code> <code>False</code></td>
+<td>Whether or not to redraw what is already being displayed on the LED matrix when flipped. Defaults to <code>True</code></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils">
+<thead>
+<tr>
+<th>Returned type</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>List</td>
+<td>A list containing 64 smaller lists of <code>[R, G, B]</code> pixels (red, green, blue) representing the flipped image.</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python hljs"><span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+
+sense = SenseHat()
+sense.flip_v()
+</code></pre>
+
+<hr>
+<h3 id="set_pixels">set_pixels</h3>
+<p>Updates the entire LED matrix based on a 64 length list of pixel values.</p>
+<table class="docutils">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Valid values</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pixel_list</code></td>
+<td>List</td>
+<td><code>[[R, G, B] * 64]</code></td>
+<td>A list containing 64 smaller lists of <code>[R, G, B]</code> pixels (red, green, blue). Each R-G-B element must be an integer between 0 and 255.</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils">
+<thead>
+<tr>
+<th>Returned type</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>None</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python hljs"><span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+
+sense = SenseHat()
+
+X = [<span class="hljs-number">255</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>]  <span class="hljs-comment"># Red</span>
+O = [<span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>]  <span class="hljs-comment"># White</span>
+
+question_mark = [
+O, O, O, X, X, O, O, O,
+O, O, X, O, O, X, O, O,
+O, O, O, O, O, X, O, O,
+O, O, O, O, X, O, O, O,
+O, O, O, X, O, O, O, O,
+O, O, O, X, O, O, O, O,
+O, O, O, O, O, O, O, O,
+O, O, O, X, O, O, O, O
+]
+
+sense.set_pixels(question_mark)
+</code></pre>
+
+<hr>
+<h3 id="get_pixels">get_pixels</h3>
+<table class="docutils">
+<thead>
+<tr>
+<th>Returned type</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>List</td>
+<td>A list containing 64 smaller lists of <code>[R, G, B]</code> pixels (red, green, blue) representing the currently displayed image.</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python hljs"><span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+
+sense = SenseHat()
+pixel_list = sense.get_pixels()
+</code></pre>
+
+<p>Note: You will notice that the pixel values you pass into <code>set_pixels</code> sometimes change when you read them back with  <code>get_pixels</code>.
+ This is because we specify each pixel element as 8 bit numbers (0 to 
+255) but when they're passed into the Linux frame buffer for the LED 
+matrix the numbers are bit shifted down to fit into RGB 565. 5 bits for 
+red, 6 bits for green and 5 bits for blue. The loss of binary precision 
+when performing this conversion (3 bits lost for red, 2 for green and 3 
+for blue) accounts for the discrepancies you see.</p>
+<p>The <code>get_pixels</code> function provides a correct representation of how the pixels end up in frame buffer memory after you've called <code>set_pixels</code>.</p>
+<hr>
+<h3 id="set_pixel">set_pixel</h3>
+<p>Sets an individual LED matrix pixel at the specified X-Y coordinate to the specified colour.</p>
+<table class="docutils">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Valid values</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td>Integer</td>
+<td><code>0 - 7</code></td>
+<td>0 is on the left, 7 on the right.</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td>Integer</td>
+<td><code>0 - 7</code></td>
+<td>0 is at the top, 7 at the bottom.</td>
+</tr>
+<tr>
+<td>Colour can either be passed as an RGB tuple:</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>pixel</code></td>
+<td>Tuple or List</td>
+<td><code>(r, g, b)</code></td>
+<td>Each element must be an integer between 0 and 255.</td>
+</tr>
+<tr>
+<td>Or three separate values for red, green and blue:</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>r</code></td>
+<td>Integer</td>
+<td><code>0 - 255</code></td>
+<td>The Red element of the pixel.</td>
+</tr>
+<tr>
+<td><code>g</code></td>
+<td>Integer</td>
+<td><code>0 - 255</code></td>
+<td>The Green element of the pixel.</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td>Integer</td>
+<td><code>0 - 255</code></td>
+<td>The Blue element of the pixel.</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils">
+<thead>
+<tr>
+<th>Returned type</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>None</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python hljs"><span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+
+sense = SenseHat()
+
+<span class="hljs-comment"># examples using (x, y, r, g, b)</span>
+sense.set_pixel(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>)
+sense.set_pixel(<span class="hljs-number">0</span>, <span class="hljs-number">7</span>, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>, <span class="hljs-number">0</span>)
+sense.set_pixel(<span class="hljs-number">7</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>)
+sense.set_pixel(<span class="hljs-number">7</span>, <span class="hljs-number">7</span>, <span class="hljs-number">255</span>, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>)
+
+red = (<span class="hljs-number">255</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>)
+green = (<span class="hljs-number">0</span>, <span class="hljs-number">255</span>, <span class="hljs-number">0</span>)
+blue = (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>)
+
+<span class="hljs-comment"># examples using (x, y, pixel)</span>
+sense.set_pixel(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, red)
+sense.set_pixel(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, green)
+sense.set_pixel(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, blue)
+</code></pre>
+
+<hr>
+<h3 id="get_pixel">get_pixel</h3>
+<table class="docutils">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Valid values</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td>Integer</td>
+<td><code>0 - 7</code></td>
+<td>0 is on the left, 7 on the right.</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td>Integer</td>
+<td><code>0 - 7</code></td>
+<td>0 is at the top, 7 at the bottom.</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils">
+<thead>
+<tr>
+<th>Returned type</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>List</td>
+<td>Returns a list of <code>[R, G, B]</code> representing the colour of an individual LED matrix pixel at the specified X-Y coordinate.</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python hljs"><span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+
+sense = SenseHat()
+top_left_pixel = sense.get_pixel(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)
+</code></pre>
+
+<p>Note: Please read the note under <code>get_pixels</code></p>
+<hr>
+<h3 id="load_image">load_image</h3>
+<p>Loads an image file, converts it to RGB format and displays it on the LED matrix. The image must be 8 x 8 pixels in size.</p>
+<table class="docutils">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Valid values</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>file_path</code></td>
+<td>String</td>
+<td>Any valid file path.</td>
+<td>The file system path to the image file to load.</td>
+</tr>
+<tr>
+<td><code>redraw</code></td>
+<td>Boolean</td>
+<td><code>True</code> <code>False</code></td>
+<td>Whether or not to redraw the loaded image file on the LED matrix. Defaults to <code>True</code></td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python hljs"><span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+
+sense = SenseHat()
+sense.load_image(<span class="hljs-string">"space_invader.png"</span>)
+</code></pre>
+
+<table class="docutils">
+<thead>
+<tr>
+<th>Returned type</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>List</td>
+<td>A list containing 64 smaller lists of <code>[R, G, B]</code> pixels (red, green, blue) representing the loaded image after RGB conversion.</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python hljs"><span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+
+sense = SenseHat()
+invader_pixels = sense.load_image(<span class="hljs-string">"space_invader.png"</span>, redraw=<span class="hljs-keyword">False</span>)
+</code></pre>
+
+<hr>
+<h3 id="clear">clear</h3>
+<p>Sets the entire LED matrix to a single colour, defaults to blank / off.</p>
+<table class="docutils">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Valid values</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>colour</code></td>
+<td>Tuple or List</td>
+<td><code>(r, g, b)</code></td>
+<td>A tuple or list containing the RGB (red, green, blue) values of the 
+colour. Each element must be an integer between 0 and 255. Defaults to <code>(0, 0, 0)</code>.</td>
+</tr>
+<tr>
+<td>Alternatively, the RGB values can be passed individually:</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>r</code></td>
+<td>Integer</td>
+<td><code>0 - 255</code></td>
+<td>The Red element of the colour.</td>
+</tr>
+<tr>
+<td><code>g</code></td>
+<td>Integer</td>
+<td><code>0 - 255</code></td>
+<td>The Green element of the colour.</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td>Integer</td>
+<td><code>0 - 255</code></td>
+<td>The Blue element of the colour.</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python hljs"><span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+<span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> sleep
+
+sense = SenseHat()
+
+red = (<span class="hljs-number">255</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>)
+
+sense.clear()  <span class="hljs-comment"># no arguments defaults to off</span>
+sleep(<span class="hljs-number">1</span>)
+sense.clear(red)  <span class="hljs-comment"># passing in an RGB tuple</span>
+sleep(<span class="hljs-number">1</span>)
+sense.clear(<span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>)  <span class="hljs-comment"># passing in r, g and b values of a colour</span>
+</code></pre>
+
+<hr>
+<h3 id="show_message">show_message</h3>
+<p>Scrolls a text message from right to left across the LED matrix and 
+at the specified speed, in the specified colour and background colour.</p>
+<table class="docutils">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Valid values</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>text_string</code></td>
+<td>String</td>
+<td>Any text string.</td>
+<td>The message to scroll.</td>
+</tr>
+<tr>
+<td><code>scroll_speed</code></td>
+<td>Float</td>
+<td>Any floating point number.</td>
+<td>The speed at which the text should scroll. This value represents the
+ time paused for between shifting the text to the left by one column of 
+pixels. Defaults to <code>0.1</code></td>
+</tr>
+<tr>
+<td><code>text_colour</code></td>
+<td>List</td>
+<td><code>[R, G, B]</code></td>
+<td>A list containing the R-G-B (red, green, blue) colour of the text. 
+Each R-G-B element must be an integer between 0 and 255. Defaults to <code>[255, 255, 255]</code> white.</td>
+</tr>
+<tr>
+<td><code>back_colour</code></td>
+<td>List</td>
+<td><code>[R, G, B]</code></td>
+<td>A list containing the R-G-B (red, green, blue) colour of the 
+background. Each R-G-B element must be an integer between 0 and 255. 
+Defaults to <code>[0, 0, 0]</code> black / off.</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils">
+<thead>
+<tr>
+<th>Returned type</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>None</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python hljs"><span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+
+sense = SenseHat()
+sense.show_message(<span class="hljs-string">"One small step for Pi!"</span>, text_colour=[<span class="hljs-number">255</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>])
+</code></pre>
+
+<hr>
+<h3 id="show_letter">show_letter</h3>
+<p>Displays a single text character on the LED matrix.</p>
+<table class="docutils">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Valid values</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>String</td>
+<td>A text string of length 1.</td>
+<td>The letter to show.</td>
+</tr>
+<tr>
+<td><code>text_colour</code></td>
+<td>List</td>
+<td><code>[R, G, B]</code></td>
+<td>A list containing the R-G-B (red, green, blue) colour of the letter.
+ Each R-G-B element must be an integer between 0 and 255. Defaults to <code>[255, 255, 255]</code> white.</td>
+</tr>
+<tr>
+<td><code>back_colour</code></td>
+<td>List</td>
+<td><code>[R, G, B]</code></td>
+<td>A list containing the R-G-B (red, green, blue) colour of the 
+background. Each R-G-B element must be an integer between 0 and 255. 
+Defaults to <code>[0, 0, 0]</code> black / off.</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils">
+<thead>
+<tr>
+<th>Returned type</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>None</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python hljs"><span class="hljs-keyword">import</span> time
+<span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+
+sense = SenseHat()
+
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> reversed(range(<span class="hljs-number">0</span>,<span class="hljs-number">10</span>)):
+    sense.show_letter(str(i))
+    time.sleep(<span class="hljs-number">1</span>)
+</code></pre>
+
+<h3 id="low_light">low_light</h3>
+<p>Toggles the LED matrix low light mode, useful if the Sense HAT is being used in a dark environment.</p>
+<pre><code class="python hljs"><span class="hljs-keyword">import</span> time
+<span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+
+sense = SenseHat()
+sense.clear(<span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>)
+sense.low_light = <span class="hljs-keyword">True</span>
+time.sleep(<span class="hljs-number">2</span>)
+sense.low_light = <span class="hljs-keyword">False</span>
+</code></pre>
+
+<h3 id="gamma">gamma</h3>
+<p>For advanced users. Most users will just need the <code>low_light</code>
+ Boolean property above. The Sense HAT python API uses 8 bit (0 to 255) 
+colours for R, G, B. When these are written to the Linux frame buffer 
+they're bit shifted into RGB 5 6 5. The driver then converts them to RGB
+ 5 5 5 before it passes them over to the ATTiny88 AVR for writing to the
+ LEDs.</p>
+<p>The gamma property allows you to specify a gamma lookup table for the <a href="http://en.battlestarwiki.org/wiki/Final_Five">final 5</a>
+ bits of colour used. The lookup table is a list of 32 numbers that must
+ be between 0 and 31. The value of the incoming 5 bit colour is used to 
+index the lookup table and the value found at that position is then 
+written to the LEDs.</p>
+<table class="docutils">
+<thead>
+<tr>
+<th>Type</th>
+<th>Valid values</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tuple or List</td>
+<td>Tuple or List of length 32 containing Integers between 0 and 31</td>
+<td>Gamma lookup table for the final 5 bits of colour</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python hljs"><span class="hljs-keyword">import</span> time
+<span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+
+sense = SenseHat()
+sense.clear(<span class="hljs-number">255</span>, <span class="hljs-number">127</span>, <span class="hljs-number">0</span>)
+
+print(sense.gamma)
+time.sleep(<span class="hljs-number">2</span>)
+
+sense.gamma = reversed(sense.gamma)
+print(sense.gamma)
+time.sleep(<span class="hljs-number">2</span>)
+
+sense.low_light = <span class="hljs-keyword">True</span>
+print(sense.gamma)
+time.sleep(<span class="hljs-number">2</span>)
+
+sense.low_light = <span class="hljs-keyword">False</span>
+</code></pre>
+
+<h3 id="gamma_reset">gamma_reset</h3>
+<p>A function to reset the gamma lookup table to default, ideal if 
+you've been messing with it and want to get it back to a default state.</p>
+<table class="docutils">
+<thead>
+<tr>
+<th>Returned type</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>None</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python hljs"><span class="hljs-keyword">import</span> time
+<span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+
+sense = SenseHat()
+sense.clear(<span class="hljs-number">255</span>, <span class="hljs-number">127</span>, <span class="hljs-number">0</span>)
+time.sleep(<span class="hljs-number">2</span>)
+sense.gamma = [<span class="hljs-number">0</span>] * <span class="hljs-number">32</span>  <span class="hljs-comment"># Will turn the LED matrix off</span>
+time.sleep(<span class="hljs-number">2</span>)
+sense.gamma_reset()
+</code></pre>
+
+<hr>
+<h2 id="environmental-sensors">Environmental sensors</h2>
+<h3 id="get_humidity">get_humidity</h3>
+<p>Gets the percentage of relative humidity from the humidity sensor.</p>
+<table class="docutils">
+<thead>
+<tr>
+<th>Returned type</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Float</td>
+<td>The percentage of relative humidity.</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python hljs"><span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+
+sense = SenseHat()
+humidity = sense.get_humidity()
+print(<span class="hljs-string">"Humidity: %s %%rH"</span> % humidity)
+
+<span class="hljs-comment"># alternatives</span>
+print(sense.humidity)
+</code></pre>
+
+<hr>
+<h3 id="get_temperature">get_temperature</h3>
+<p>Calls <code>get_temperature_from_humidity</code> below.</p>
+<pre><code class="python hljs"><span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+
+sense = SenseHat()
+temp = sense.get_temperature()
+print(<span class="hljs-string">"Temperature: %s C"</span> % temp)
+
+<span class="hljs-comment"># alternatives</span>
+print(sense.temp)
+print(sense.temperature)
+</code></pre>
+
+<hr>
+<h3 id="get_temperature_from_humidity">get_temperature_from_humidity</h3>
+<p>Gets the current temperature in degrees Celsius from the humidity sensor.</p>
+<table class="docutils">
+<thead>
+<tr>
+<th>Returned type</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Float</td>
+<td>The current temperature in degrees Celsius.</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python hljs"><span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+
+sense = SenseHat()
+temp = sense.get_temperature_from_humidity()
+print(<span class="hljs-string">"Temperature: %s C"</span> % temp)
+</code></pre>
+
+<hr>
+<h3 id="get_temperature_from_pressure">get_temperature_from_pressure</h3>
+<p>Gets the current temperature in degrees Celsius from the pressure sensor.</p>
+<table class="docutils">
+<thead>
+<tr>
+<th>Returned type</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Float</td>
+<td>The current temperature in degrees Celsius.</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python hljs"><span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+
+sense = SenseHat()
+temp = sense.get_temperature_from_pressure()
+print(<span class="hljs-string">"Temperature: %s C"</span> % temp)
+</code></pre>
+
+<hr>
+<h3 id="get_pressure">get_pressure</h3>
+<p>Gets the current pressure in Millibars from the pressure sensor.</p>
+<table class="docutils">
+<thead>
+<tr>
+<th>Returned type</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Float</td>
+<td>The current pressure in Millibars.</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python hljs"><span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+
+sense = SenseHat()
+pressure = sense.get_pressure()
+print(<span class="hljs-string">"Pressure: %s Millibars"</span> % pressure)
+
+<span class="hljs-comment"># alternatives</span>
+print(sense.pressure)
+</code></pre>
+
+<hr>
+<h2 id="imu-sensor">IMU Sensor</h2>
+<p>The IMU (inertial measurement unit) sensor is a combination of three 
+sensors, each with an x, y and z axis. For this reason it's considered 
+to be a 9 dof (degrees of freedom) sensor.</p>
+<ul>
+<li>Gyroscope</li>
+<li>Accelerometer</li>
+<li>Magnetometer (compass)</li>
+</ul>
+<p>This API allows you to use these sensors in any combination to measure orientation or as individual sensors in their own right.</p>
+<h3 id="set_imu_config">set_imu_config</h3>
+<p>Enables and disables the gyroscope, accelerometer and/or magnetometer contribution to the get orientation functions below.</p>
+<table class="docutils">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Valid values</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>compass_enabled</code></td>
+<td>Boolean</td>
+<td><code>True</code> <code>False</code></td>
+<td>Whether or not the compass should be enabled.</td>
+</tr>
+<tr>
+<td><code>gyro_enabled</code></td>
+<td>Boolean</td>
+<td><code>True</code> <code>False</code></td>
+<td>Whether or not the gyroscope should be enabled.</td>
+</tr>
+<tr>
+<td><code>accel_enabled</code></td>
+<td>Boolean</td>
+<td><code>True</code> <code>False</code></td>
+<td>Whether or not the accelerometer should be enabled.</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils">
+<thead>
+<tr>
+<th>Returned type</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>None</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python hljs"><span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+
+sense = SenseHat()
+sense.set_imu_config(<span class="hljs-keyword">False</span>, <span class="hljs-keyword">True</span>, <span class="hljs-keyword">False</span>)  <span class="hljs-comment"># gyroscope only</span>
+</code></pre>
+
+<hr>
+<h3 id="get_orientation_radians">get_orientation_radians</h3>
+<p>Gets the current orientation in radians using the aircraft principal axes of pitch, roll and yaw.</p>
+<table class="docutils">
+<thead>
+<tr>
+<th>Returned type</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dictionary</td>
+<td>A dictionary object indexed by the strings <code>pitch</code>, <code>roll</code> and <code>yaw</code>. The values are Floats representing the angle of the axis in radians.</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python hljs"><span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+
+sense = SenseHat()
+orientation_rad = sense.get_orientation_radians()
+print(<span class="hljs-string">"p: {pitch}, r: {roll}, y: {yaw}"</span>.format(**orientation_rad))
+
+<span class="hljs-comment"># alternatives</span>
+print(sense.orientation_radians)
+</code></pre>
+
+<hr>
+<h3 id="get_orientation_degrees">get_orientation_degrees</h3>
+<p>Gets the current orientation in degrees using the aircraft principal axes of pitch, roll and yaw.</p>
+<table class="docutils">
+<thead>
+<tr>
+<th>Returned type</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dictionary</td>
+<td>A dictionary object indexed by the strings <code>pitch</code>, <code>roll</code> and <code>yaw</code>. The values are Floats representing the angle of the axis in degrees.</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python hljs"><span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+
+sense = SenseHat()
+orientation = sense.get_orientation_degrees()
+print(<span class="hljs-string">"p: {pitch}, r: {roll}, y: {yaw}"</span>.format(**orientation))
+</code></pre>
+
+<hr>
+<h3 id="get_orientation">get_orientation</h3>
+<p>Calls <code>get_orientation_degrees</code> above.</p>
+<pre><code class="python hljs"><span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+
+sense = SenseHat()
+orientation = sense.get_orientation()
+print(<span class="hljs-string">"p: {pitch}, r: {roll}, y: {yaw}"</span>.format(**orientation))
+
+<span class="hljs-comment"># alternatives</span>
+print(sense.orientation)
+</code></pre>
+
+<hr>
+<h3 id="get_compass">get_compass</h3>
+<p>Calls <code>set_imu_config</code> to disable the gyroscope and accelerometer then gets the direction of North from the magnetometer in degrees.</p>
+<table class="docutils">
+<thead>
+<tr>
+<th>Returned type</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Float</td>
+<td>The direction of North.</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python hljs"><span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+
+sense = SenseHat()
+north = sense.get_compass()
+print(<span class="hljs-string">"North: %s"</span> % north)
+
+<span class="hljs-comment"># alternatives</span>
+print(sense.compass)
+</code></pre>
+
+<hr>
+<h3 id="get_compass_raw">get_compass_raw</h3>
+<p>Gets the raw x, y and z axis magnetometer data.</p>
+<table class="docutils">
+<thead>
+<tr>
+<th>Returned type</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dictionary</td>
+<td>A dictionary object indexed by the strings <code>x</code>, <code>y</code> and <code>z</code>. The values are Floats representing the magnetic intensity of the axis in <strong>microteslas</strong> (µT).</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python hljs"><span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+
+sense = SenseHat()
+raw = sense.get_compass_raw()
+print(<span class="hljs-string">"x: {x}, y: {y}, z: {z}"</span>.format(**raw))
+
+<span class="hljs-comment"># alternatives</span>
+print(sense.compass_raw)
+</code></pre>
+
+<hr>
+<h3 id="get_gyroscope">get_gyroscope</h3>
+<p>Calls <code>set_imu_config</code> to disable the magnetometer and accelerometer then gets the current orientation from the gyroscope only.</p>
+<table class="docutils">
+<thead>
+<tr>
+<th>Returned type</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dictionary</td>
+<td>A dictionary object indexed by the strings <code>pitch</code>, <code>roll</code> and <code>yaw</code>. The values are Floats representing the angle of the axis in degrees.</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python hljs"><span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+
+sense = SenseHat()
+gyro_only = sense.get_gyroscope()
+print(<span class="hljs-string">"p: {pitch}, r: {roll}, y: {yaw}"</span>.format(**gyro_only))
+
+<span class="hljs-comment"># alternatives</span>
+print(sense.gyro)
+print(sense.gyroscope)
+</code></pre>
+
+<hr>
+<h3 id="get_gyroscope_raw">get_gyroscope_raw</h3>
+<p>Gets the raw x, y and z axis gyroscope data.</p>
+<table class="docutils">
+<thead>
+<tr>
+<th>Returned type</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dictionary</td>
+<td>A dictionary object indexed by the strings <code>x</code>, <code>y</code> and <code>z</code>. The values are Floats representing the rotational intensity of the axis in <strong>radians per second</strong>.</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python hljs"><span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+
+sense = SenseHat()
+raw = sense.get_gyroscope_raw()
+print(<span class="hljs-string">"x: {x}, y: {y}, z: {z}"</span>.format(**raw))
+
+<span class="hljs-comment"># alternatives</span>
+print(sense.gyro_raw)
+print(sense.gyroscope_raw)
+</code></pre>
+
+<hr>
+<h3 id="get_accelerometer">get_accelerometer</h3>
+<p>Calls <code>set_imu_config</code> to disable the magnetometer and gyroscope then gets the current orientation from the accelerometer only.</p>
+<table class="docutils">
+<thead>
+<tr>
+<th>Returned type</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dictionary</td>
+<td>A dictionary object indexed by the strings <code>pitch</code>, <code>roll</code> and <code>yaw</code>. The values are Floats representing the angle of the axis in degrees.</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python hljs"><span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+
+sense = SenseHat()
+accel_only = sense.get_accelerometer()
+print(<span class="hljs-string">"p: {pitch}, r: {roll}, y: {yaw}"</span>.format(**accel_only))
+
+<span class="hljs-comment"># alternatives</span>
+print(sense.accel)
+print(sense.accelerometer)
+</code></pre>
+
+<hr>
+<h3 id="get_accelerometer_raw">get_accelerometer_raw</h3>
+<p>Gets the raw x, y and z axis accelerometer data.</p>
+<table class="docutils">
+<thead>
+<tr>
+<th>Returned type</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dictionary</td>
+<td>A dictionary object indexed by the strings <code>x</code>, <code>y</code> and <code>z</code>. The values are Floats representing the acceleration intensity of the axis in <strong>Gs</strong>.</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python hljs"><span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+
+sense = SenseHat()
+raw = sense.get_accelerometer_raw()
+print(<span class="hljs-string">"x: {x}, y: {y}, z: {z}"</span>.format(**raw))
+
+<span class="hljs-comment"># alternatives</span>
+print(sense.accel_raw)
+print(sense.accelerometer_raw)
+</code></pre>
+
+<hr>
+<h2 id="joystick">Joystick</h2>
+<h3 id="inputevent">InputEvent</h3>
+<p>A tuple describing a joystick event. Contains three named parameters:</p>
+<ul>
+<li>
+<p><code>timestamp</code> - The time at which the event occurred, as a fractional number of seconds (the same format as the built-in <code>time</code> function)</p>
+</li>
+<li>
+<p><code>direction</code> - The direction the joystick was moved, as a string (<code>"up"</code>, <code>"down"</code>, <code>"left"</code>, <code>"right"</code>, <code>"middle"</code>)</p>
+</li>
+<li>
+<p><code>action</code> - The action that occurred, as a string (<code>"pressed"</code>, <code>"released"</code>, <code>"held"</code>)</p>
+</li>
+</ul>
+<p>This tuple type is used by several joystick methods either as the return type
+or the type of a parameter.</p>
+<hr>
+<h3 id="wait_for_event">wait_for_event</h3>
+<p>Blocks execution until a joystick event occurs, then returns an <code>InputEvent</code>
+representing the event that occurred.</p>
+<pre><code class="python hljs"><span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+<span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> sleep
+
+sense = SenseHat()
+event = sense.stick.wait_for_event()
+print(<span class="hljs-string">"The joystick was {} {}"</span>.format(event.action, event.direction))
+sleep(<span class="hljs-number">0.1</span>)
+event = sense.stick.wait_for_event()
+print(<span class="hljs-string">"The joystick was {} {}"</span>.format(event.action, event.direction))
+</code></pre>
+
+<p>In the above example, if you briefly push the joystick in a single direction
+you should see two events output: a pressed action and a released action.
+The optional <em>emptybuffer</em> can be used to flush any pending events before
+waiting for new events. Try the following script to see the difference:</p>
+<pre><code class="python hljs"><span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+<span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> sleep
+
+sense = SenseHat()
+event = sense.stick.wait_for_event()
+print(<span class="hljs-string">"The joystick was {} {}"</span>.format(event.action, event.direction))
+sleep(<span class="hljs-number">0.1</span>)
+event = sense.stick.wait_for_event(emptybuffer=<span class="hljs-keyword">True</span>)
+print(<span class="hljs-string">"The joystick was {} {}"</span>.format(event.action, event.direction))
+</code></pre>
+
+<hr>
+<h3 id="get_events">get_events</h3>
+<p>Returns a list of <code>InputEvent</code> tuples representing all events that have
+occurred since the last call to <code>get_events</code> or <code>wait_for_event</code>.</p>
+<pre><code class="python hljs"><span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat
+
+sense = SenseHat()
+<span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
+    <span class="hljs-keyword">for</span> event <span class="hljs-keyword">in</span> sense.stick.get_events():
+        print(<span class="hljs-string">"The joystick was {} {}"</span>.format(event.action, event.direction))
+</code></pre>
+
+<hr>
+<h3 id="direction_up-direction_left-direction_right-direction_down-direction_middle-direction_any">direction_up, direction_left, direction_right, direction_down, direction_middle, direction_any</h3>
+<p>These attributes can be assigned a function which will be called whenever the
+joystick is pushed in the associated direction (or in any direction in the case
+of <code>direction_any</code>). The function assigned must either take no parameters or
+must take a single parameter which will be passed the associated <code>InputEvent</code>.</p>
+<pre><code class="python hljs"><span class="hljs-keyword">from</span> sense_hat <span class="hljs-keyword">import</span> SenseHat, ACTION_PRESSED, ACTION_HELD, ACTION_RELEASED
+<span class="hljs-keyword">from</span> signal <span class="hljs-keyword">import</span> pause
+
+x = <span class="hljs-number">3</span>
+y = <span class="hljs-number">3</span>
+sense = SenseHat()
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">clamp</span><span class="hljs-params">(value, min_value=<span class="hljs-number">0</span>, max_value=<span class="hljs-number">7</span>)</span>:</span>
+    <span class="hljs-keyword">return</span> min(max_value, max(min_value, value))
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pushed_up</span><span class="hljs-params">(event)</span>:</span>
+    <span class="hljs-keyword">global</span> y
+    <span class="hljs-keyword">if</span> event.action != ACTION_RELEASED:
+        y = clamp(y - <span class="hljs-number">1</span>)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pushed_down</span><span class="hljs-params">(event)</span>:</span>
+    <span class="hljs-keyword">global</span> y
+    <span class="hljs-keyword">if</span> event.action != ACTION_RELEASED:
+        y = clamp(y + <span class="hljs-number">1</span>)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pushed_left</span><span class="hljs-params">(event)</span>:</span>
+    <span class="hljs-keyword">global</span> x
+    <span class="hljs-keyword">if</span> event.action != ACTION_RELEASED:
+        x = clamp(x - <span class="hljs-number">1</span>)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pushed_right</span><span class="hljs-params">(event)</span>:</span>
+    <span class="hljs-keyword">global</span> x
+    <span class="hljs-keyword">if</span> event.action != ACTION_RELEASED:
+        x = clamp(x + <span class="hljs-number">1</span>)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">refresh</span><span class="hljs-params">()</span>:</span>
+    sense.clear()
+    sense.set_pixel(x, y, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>)
+
+sense.stick.direction_up = pushed_up
+sense.stick.direction_down = pushed_down
+sense.stick.direction_left = pushed_left
+sense.stick.direction_right = pushed_right
+sense.stick.direction_any = refresh
+refresh()
+pause()
+</code></pre>
+
+<p>Note that the <code>direction_any</code> event is always called <em>after</em> all other events
+making it an ideal hook for things like display refreshing (as in the example
+above).</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="https://pythonhosted.org/sense-hat/changelog/" class="btn btn-neutral float-right" title="Changelog">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="https://pythonhosted.org/sense-hat/" class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/RPi-Distro/python-sense-hat" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="https://pythonhosted.org/sense-hat/" style="color: #fcfcfc;">« Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="https://pythonhosted.org/sense-hat/changelog/" style="color: #fcfcfc">Next »</a></span>
+      
+    </span>
+</div>
+    <script src="API%20Reference%20-%20Sense%20HAT_files/theme.js"></script>
+
+
+
+</body></html>
