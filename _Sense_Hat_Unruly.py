@@ -5,182 +5,177 @@ class Game :
     """Stores general game parameters"""
 
     def __init__(self) :
-        grid :list = list(())
-        errors :list = list(())
-        immutable :list = list(())
-        completed :bool =False
+        self.grid :list = list(())
+        self.errors :list = list(())
+        self.immutable :list = list(())
+        self.completed :bool =False
         for i in range(64) :
-            grid.append(0)
-            errors.append(0)
-            immutable.append(False)
-
-class Scratch :
-    """Stores scratch parameters"""
-
-    def __init(self) :
+            self.grid.append(0)
+            self.errors.append(0)
+            self.immutable.append(False)
         self.ones_rows  :list = [0,0,0,0,0,0,0,0]
         self.ones_cols  :list = [0,0,0,0,0,0,0,0]
         self.zeros_rows :list = [0,0,0,0,0,0,0,0]
         self.zeros_cols :list = [0,0,0,0,0,0,0,0]
 
+    def update_counts(self) -> None :
+        """Update the ones_rows..zeros_cols vectors based on the current grid status"""
+        self.ones_rows  = [0,0,0,0,0,0,0,0]
+        self.ones_cols  = [0,0,0,0,0,0,0,0]
+        self.zeros_rows = [0,0,0,0,0,0,0,0]
+        self.zeros_cols = [0,0,0,0,0,0,0,0]
+        for j in range(8) :
+            for i in range(8) :
+                if self.grid[8*j+i] == 1 :
+                    self.ones_rows[j] += 1
+                    self.ones_cols[i] += 1
+                elif self.grid[8*j+i] == 2 :
+                    self.zeros_rows[j] += 1
+                    self.zeros_cols[i] += 1
 
+    def solve(self) -> None :
+        """The main Solve algo that calls all others.
+        Maiden name: unruly_solve_game"""
+        while True :
+            # Keep repeating checks from easiest to the hardest as long as they produce outputs
 
-def unruly_solver_update_remaining(gms, scr) -> None :
-    scr.ones_rows  = [0,0,0,0,0,0,0,0]
-    scr.ones_cols  = [0,0,0,0,0,0,0,0]
-    scr.zeros_rows = [0,0,0,0,0,0,0,0]
-    scr.zeros_cols = [0,0,0,0,0,0,0,0]
+            # Check for impending 3's
+            if self.unruly_solver_check_all_threes() : continue
+            # Check for rows with only one unfilled square
+            if self.unruly_solver_check_all_one_color_complete() : continue
+            # Check for impending failures of row/column uniqueness, if it's enabled in this game mode
+            if self.unruly_solver_check_all_uniques() : continue
+            # Check for nearly completed rows
+            if self.unruly_solver_check_all_near_complete() : continue
 
-    for x in range(8) :
-        for y in range(8) :
-            if gms.grid[y*8+x] == 1 :
-                scr.ones_rows[y]+=1
-                scr.ones_cols[x]+=1
-            elif gms.grid[y*8+x] == 2 :
-                scr.zeros_rows[y]+=1
-                scr.zeros_cols[x]+=1
+            # If we have reached this pont so far with no improvement, then exit.
+            break
 
-def unruly_solver_check_threes(gms6, scr6, horizontal :bool, check :int, block :int) -> int :
-    """Check for any three squares which almost form three in a row"""
-    dx :int = 1 if horizontal else 0
-    dy :int = 1-dx
-    sx :int = dx ; sy :int = dy
-    ex :int = 8-dx ; ey :int = 8-dy
-    ret :int = 0
+    def unruly_solver_check_all_threes(self) -> int :
+        ret :int =0
+        ret += self.unruly_solver_check_threes(True, 1, 2)
+        ret += self.unruly_solver_check_threes(True, 2, 1)
+        ret += self.unruly_solver_check_threes(False,1, 2)
+        ret += self.unruly_solver_check_threes(False,2, 1)
+        return ret
 
-    for y in range(sy, ey) :
-        for x in range(sx, ex) :
-            i1 = (y-dy) *8 + (x-dx)
-            i2 = y*8 + x
-            i3 = (y+dy) *8 + (x+dx)
-            if gms6.grid[i1] == check and gms6.grid[i2] == check and gms6.grid[i3] == 0 :
+    def unruly_solver_check_threes(self, horizontal :bool, check :int, block :int) -> int :
+        """Check for any three squares which almost form three in a row"""
+        dx :int = 1 if horizontal else 0
+        dy :int = 1-dx
+        sx :int = dx ; sy :int = dy
+        ex :int = 8-dx ; ey :int = 8-dy
+        ret :int = 0
+
+        for y in range(sy, ey) :
+            for x in range(sx, ex) :
+                i1 = (y-dy) *8 + (x-dx)
+                i2 = y*8 + x
+                i3 = (y+dy) *8 + (x+dx)
+                if (self.grid[i1], self.grid[i2], self.grid[i3]) == (check,check,0) :
+                    ret+=1
+                    self.grid[i3] = block
+                if (self.grid[i1], self.grid[i2], self.grid[i3]) == (check,0,check) :
+                    ret+=1
+                    self.grid[i2] = block
+                if (self.grid[i1], self.grid[i2], self.grid[i3]) == (0,check,check) :
+                    ret+=1
+                    self.grid[i1] = block
+        self.update_counts()
+        return ret
+
+    def unruly_solver_check_all_one_color_complete(self) -> int :
+        ret :int =0
+        ret += self.unruly_solver_check_one_color_complete(True,  2)
+        ret += self.unruly_solver_check_one_color_complete(False, 2)
+        ret += self.unruly_solver_check_one_color_complete(True,  1)
+        ret += self.unruly_solver_check_one_color_complete(False, 1)
+        return ret
+
+    def unruly_solver_check_one_color_complete(self, horizontal :bool, fill :int) -> int :
+        """Check for completed rows/cols for one number, then fill in the rest"""
+        ret :int =0
+        self.update_counts()
+        if horizontal :
+            if fill == 2 :
+                for i in range(8) :
+                    if self.ones_rows[i] == 4 and self.zeros_rows[i] < 4 :
+                        ret += self.unruly_solver_fill_row(i, horizontal, fill)
+            elif fill == 1 :
+                for i in range(8) :
+                    if self.zeros_rows[i] == 4 and self.ones_rows[i] < 4 :
+                        ret += self.unruly_solver_fill_row(i, horizontal, fill)
+        else :
+            if fill == 2 :
+                for i in range(8) :
+                    if self.ones_cols[i] == 4 and self.zeros_cols[i] < 4 :
+                        ret += self.unruly_solver_fill_row(i, horizontal, fill)
+            elif fill == 1 :
+                for i in range(8) :
+                    if self.zeros_cols[i] == 4 and self.ones_cols[i] < 4 :
+                        ret += self.unruly_solver_fill_row(i, horizontal, fill)
+        return ret
+
+    def unruly_solver_fill_row(self, i :int, horizontal :bool, fill :int) -> int :
+        """Place a number in every empty square in a row/column"""
+        ret :int =0
+        for j in range(8) :
+            p = i*8+j if horizontal else j*8+i
+            if self.grid[p] == 0 :
                 ret+=1
-                gms6.grid[i3] = block
-                if block == 2 :
-                    scr6.zeros_rows[i3/8]+=1
-                    scr6.zeros_cols[i3%8]+=1
-                else :
-                    scr6.ones_rows[i3/8]+=1
-                    scr6.ones_cols[i3%8]+=1
-            if g.grid[i1] == check and g.grid[i2] == 0 and g.grid[i3] == check :
-                ret+=1
-                g.grid[i2] = block
-                if block == 2 :
-                    scr6.zeros_rows[i2/8]+=1
-                    scr6.zeros_cols[i2%8]+=1
-                else :
-                    scr6.ones_rows[i2/8]+=1
-                    scr6.ones_cols[i2%8]+=1
-            if g.grid[i1] == 0 and g.grid[i2] == check and g.grid[i3] == check :
-                ret+=1
-                g.grid[i1] = block
-                if block == 2 :
-                    scr6.zeros_rows[i1/8]+=1
-                    scr6.zeros_cols[i1%8]+=1
-                else :
-                    scr6.ones_rows[i1/8]+=1
-                    scr6.ones_cols[i1%8]+=1
-    return ret
+                self.grid[p] = fill
+        self.update_counts()
+        return ret
 
-def unruly_solver_check_all_threes(gms5, scr5) -> int :
-    ret :int =0
-    ret += unruly_solver_check_threes(gms5, scr5, True, 1, 2)
-    ret += unruly_solver_check_threes(gms5, scr5, True, 2, 1)
-    ret += unruly_solver_check_threes(gms5, scr5, False,1, 2)
-    ret += unruly_solver_check_threes(gms5, scr5, False,2, 1)
-    return ret
+    def unruly_solver_check_all_uniques(self) -> int :
+        ret :int =0
+        ret += self.unruly_solver_check_uniques(True,  1, 2)
+        ret += self.unruly_solver_check_uniques(True,  2, 1)
+        ret += self.unruly_solver_check_uniques(False, 1, 2)
+        ret += self.unruly_solver_check_uniques(False, 2, 1)
+        return ret
 
+    def unruly_solver_check_uniques(self, horizontal: bool, check :int, block :int) -> int :
+        """Find each row that has max entries of type 'check', and see if all those entries match those
+        in any row with max-1 entries. If so, set the last non-matching entry of the latter row to ensure
+        that it's different."""
+        rmult :int = 8 if horizontal else 1
+        cmult :int = 1 if horizontal else 8
+        ret :int =0
 
-def unruly_solver_check_uniques(rowcount :int, horizontal: bool, check :int, block :int, scratch) -> int :
-    """Find each row that has max entries of type 'check', and see if all those entries match those
-    in any row with max-1 entries. If so, set the last non-matching entry of the latter row to ensure
-    that it's different."""
-    rmult :int = 8 if horizontal else 1
-    cmult :int = 1 if horizontal else 8
-    ###+++TODO: nr,nc = 8 ; max=4   ; törölhető ha minden oké
-    ret :int =0
-
-    for r in range(8) :
-        if rowcount[r] != 4 : continue
-        for r2 in range(8) :
-            nmatch = 0 ; nonmatch = -1
-            if rowcount[r2] != 3 : continue
-            for c in range(8) :
-                if g.grid[r*rmult + c*cmult] == check :
-                    if g.grid[r2*rmult + c*cmult] == check :
-                        nmatch+=1
+        for r in range(8) :
+            if rowcount[r] != 4 : continue
+            for r2 in range(8) :
+                nmatch = 0 ; nonmatch = -1
+                if rowcount[r2] != 3 : continue
+                for c in range(8) :
+                    if g.grid[r*rmult + c*cmult] == check :
+                        if g.grid[r2*rmult + c*cmult] == check :
+                            nmatch+=1
+                        else :
+                            nonmatch = c
+                if nmatch == 3 :
+                    i1 = r2 * rmult + nonmatch * cmult
+                    # assert(nonmatch != -1);  -- Raise exception ???
+                    if g.grid[i1] == block : continue
+                    # assert(state->grid[i1] == EMPTY);
+                    g.grid[i1] = block
+                    if block == 1 :
+                        scratch.ones_rows[i1 / 8]+=1
+                        scratch.ones_cols[i1 % 8]+=1
                     else :
-                        nonmatch = c
-            if nmatch == 3 :
-                i1 = r2 * rmult + nonmatch * cmult
-                # assert(nonmatch != -1);  -- Raise exception ???
-                if g.grid[i1] == block : continue
-                # assert(state->grid[i1] == EMPTY);
-                g.grid[i1] = block
-                if block == 1 :
-                    scratch.ones_rows[i1 / 8]+=1
-                    scratch.ones_cols[i1 % 8]+=1
-                else :
-                    scratch.zeros_rows[i1 / 8]+=1
-                    scratch.zeros_cols[i1 % 8]+=1
-                ret+=1
-    return ret
-
-def unruly_solver_check_all_uniques(scratch) -> int :
-    ret :int =0
-    ret += unruly_solver_check_uniques(scratch.ones_rows, True, 1, 2, scratch)
-    ret += unruly_solver_check_uniques(scratch.zeros_rows,True, 2, 1, scratch)
-    ret += unruly_solver_check_uniques(scratch.ones_cols, False,1, 2, scratch)
-    ret += unruly_solver_check_uniques(scratch.zeros_cols,False,2, 1, scratch)
-    return ret
+                        scratch.zeros_rows[i1 / 8]+=1
+                        scratch.zeros_cols[i1 % 8]+=1
+                    ret+=1
+        return ret
 
 
-def unruly_solver_fill_row(i :int, horizontal :bool, rowcount :int, colcount :int, fill :int) -> int :
-    """Place a number in every empty square in a row/column"""
-    ret :int =0
-    for j in range(8) :
-        p :int = i*8+j if horizontal else j*8+i
-        if g.grid[p] == 0 :
-            ret+=1
-            g.grid[p] = fill
-            x = i if horizontal else j ; y = j if horizontal else i
-            rowcount[x]+=1 ; colcount[y]+=1
-    return ret
-
-def unruly_solver_check_single_gap(gms8, scr8, horizontal :bool, fill :int) -> int :
-    """Check for completed rows/cols for one number, then fill in the rest"""
-    other = rowcount if horizontal else colcount
-    ret :int =0
-    for i in range(8) :
-        if complete[i] == 4 and other[i] == 3 :
-            ret += unruly_solver_fill_row(i, horizontal, rowcount, colcount, fill)
-    return ret
-
-def unruly_solver_check_all_single_gap(gms7, scr7) -> int :
-    ret :int =0
-    ret += unruly_solver_check_single_gap(gms7, scr7,True,  2)
-    ret += unruly_solver_check_single_gap(gms7, scr7,False, 2)
-    ret += unruly_solver_check_single_gap(gms7, scr7,True,  1)
-    ret += unruly_solver_check_single_gap(gms7, scr7,False, 1)
-    return ret
 
 
-def unruly_solver_check_complete_nums(complete :int, horizontal :bool, rowcount :int, colcount :int, fill :int) -> int :
-    """Check for completed rows/cols for one number, then fill in the rest"""
-    other = rowcount if horizontal else colcount
-    ret :int =0
-    for i in range(8) :
-        if complete[i] == 4 and other[i] < 4 :
-            ret += unruly_solver_fill_row(i, horizontal, rowcount, colcount, fill)
-    return ret
 
-def unruly_solver_check_all_complete_nums(scratch) -> int :
-    ret :int =0
-    ret += unruly_solver_check_complete_nums(scratch.ones_rows, True, scratch.zeros_rows, scratch.zeros_cols, 2)
-    ret += unruly_solver_check_complete_nums(scratch.ones_cols, False, scratch.zeros_rows, scratch.zeros_cols, 2)
-    ret += unruly_solver_check_complete_nums(scratch.zeros_rows, True, scratch.ones_rows, scratch.ones_cols, 1)
-    ret += unruly_solver_check_complete_nums(scratch.zeros_cols, False, scratch.ones_rows, scratch.ones_cols, 1)
-    return ret
+
+
+
 
 
 def unruly_solver_check_near_complete(complete :int, horizontal :bool, rowcount :int, colcount :int, fill: int) -> int :
@@ -313,48 +308,6 @@ def unruly_validate_counts(scr1) -> int :
 
 
 
-def unruly_solve_game(gms0, scr0, diff) -> int :
-    done :int =-1
-    maxdiff :int =-1
-
-    while True :
-        done =0
-
-        # Trivial techniques
-        # Check for impending 3's
-        done += unruly_solver_check_all_threes(gms0,scr0)
-        # Keep using the simpler techniques while they produce results
-        if done :
-            if maxdiff < 0 : maxdiff = 0
-            continue
-        # Check for rows with only one unfilled square
-        done += unruly_solver_check_all_single_gap(gms0,scr0)
-        if done :
-            if maxdiff < 0 : maxdiff = 0
-            continue
-
-        # Easy techniques
-        if diff < 1 : break
-        # Check for completed rows
-        done += unruly_solver_check_all_complete_nums(gms0,scr0)
-        if done :
-            if maxdiff < 1 : maxdiff = 1
-            continue
-        # Check for impending failures of row/column uniqueness, if it's enabled in this game mode
-        done += unruly_solver_check_all_uniques(gms0,scr0)
-        if done :
-            if maxdiff < 1 : maxdiff = 1
-            continue
-
-        # Normal techniques
-        if diff < 2 : break
-        # Check for nearly completed rows
-        done += unruly_solver_check_all_near_complete(gms0,scr0)
-        if done :
-            if maxdiff < 2 : maxdiff = 2
-            continue
-        break
-    return maxdiff
 
 
 
@@ -364,7 +317,6 @@ def unruly_solve_game(gms0, scr0, diff) -> int :
 #    ret :str =""
 #    solved = gms
 #    sc1 = Scratch()
-#    unruly_solver_update_remaining(solved,sc1)
 #
 #    unruly_solve_game(solved, sc1, 3)
 #    result :int = unruly_validate_counts(sc1)
@@ -415,7 +367,6 @@ def new_game_desc(rs, aux :str, interactive :bool) -> None :
         while True :
             gs = Game()
             sc = Scratch()
-            unruly_solver_update_remaining(gs,sc)
             if unruly_fill_game(gs,sc) : break
 
         # Generate random array of spaces
@@ -430,18 +381,15 @@ def new_game_desc(rs, aux :str, interactive :bool) -> None :
 
             solver = gs
             scrx = Scratch()
-            unruly_solver_update_remaining(solver,scrx)
             unruly_solve_game(solver, scrx, 2)
             if unruly_validate_counts(scrx) != 0 : gs.grid[i] =c
 
         # See if the game has accidentally come out too easy.
         solver = gs
         scrx = Scratch()
-        unruly_solver_update_remaining(solver,scrx)
         unruly_solve_game(solver, scrx, 1)
         if unruly_validate_counts(scrx) > 0 : break
 
 
 gs = Game()
 sc = Scratch()
-unruly_solver_update_remaining(gs,sc)
