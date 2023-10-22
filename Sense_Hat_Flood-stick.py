@@ -8,7 +8,7 @@ import sense_hat
 
 #################### INIT PART ####################
 
-COLOR :dict = {'_':[0,0,0], 'R':[220,0,0], 'O':[220,110,0], 'Y':[220,220,0], 'G':[0,220,0], 'C':[0,220,220], 'B':[0,0,220], 'M':[220,0,220], 'X':[255,255,255]}
+COLOR :dict = {'_':[0,0,0], 'R':[180,0,0], 'O':[170,100,0], 'Y':[160,160,0], 'G':[0,180,0], 'C':[0,160,160], 'B':[0,0,180], 'M':[160,0,160], 'X':[255,255,255]}
 # Index is first letter of the color, except '_' is background and 'X' is cursor or marker
 
 
@@ -46,7 +46,7 @@ class Cell :
         if animate :
             self.C = 'X'
             self.draw()
-            time.sleep(0.1)
+            time.sleep(0.05)
         self.C = newCol
         self.draw()
 
@@ -72,7 +72,7 @@ class Cell :
         # Need to store what was my original color:
         prevColor = self.C
         self.changeColor(newColor,True)
-        for direction in ['N','E','W','S'] :
+        for direction in ['N','E','S','W'] :
             if self.Neigh[direction] :
                 # If my direct neighbour has the same color as I did previously:
                 if self.Neigh[direction].getColor() == prevColor :
@@ -95,7 +95,7 @@ class Game :
         # Generate the 8x8 cells with random color
         for j in range(8) :
             for i in range(8) :
-                self.Board[8*j+i] = Cell(i,j)
+                self.Board.append(Cell(i,j))
         # Now link the neighbours where applicable
         for j in range(8) :
             for i in range(8) :
@@ -121,7 +121,7 @@ class Game :
         self.CurS = False
         CurObj = self.Board[8*self.CurY+self.CurX]
         CurObj.draw()
-        CurCol = CurObj.getcolor()
+        CurCol = CurObj.getColor()
         # Check if the same color was clicked as we already have flooded
         if CurCol == self.Board[0].getColor() : return
         # Flood starting with the top-left cell
@@ -158,6 +158,10 @@ class Game :
 
 #################### PROC PART ####################
 
+def clamp(Value :int) -> int :
+    """Limit the incoming value to 0..7"""
+    return max(min(Value,7),0)
+
 def moveCursor(event) -> None :
     """Handle the stick events"""
     if event.action != "pressed" : return
@@ -170,10 +174,6 @@ def moveCursor(event) -> None :
         g.CurX = clamp(g.CurX+dt[0]) ; g.CurY = clamp(g.CurY+dt[1])
         g.CurE = True
 
-def clamp(Value :int) -> int :
-    """Limit the incoming value to 0..7"""
-    return max(min(Value,7),0)
-
 
 #################### MAIN PART ####################
 
@@ -184,8 +184,13 @@ s.stick.direction_any = moveCursor
 
 while not g.GameOver :
     g.curChange()
-    time.sleep(1)
+    time.sleep(0.5)
 
-time.sleep(3)
+time.sleep(1)
+for i in range(20) :
+    (r1,g1,b1) = s.get_pixel(0,0)
+    (r1,g1,b1) = (int(0.95*r1), int(0.95*g1), int(0.95*b1))
+    s.clear((r1,g1,b1))
+    time.sleep(0.1)
 s.clear()
 s.show_message(f"{g.Steps} steps used.")
