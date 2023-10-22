@@ -26,9 +26,9 @@ while True:
     # In some percent of the cases
     if r(0,100) > 90 :
         # Draw a shiny star somewhere
-        R=r(160,255)
-        G=r(160,255)
-        B=r(160,255)
+        R=r(100,255)
+        G=r(100,255)
+        B=r(100,255)
         V[r(0,63)] = list((R,G,B))
 
     s.set_pixels(V)
