@@ -1,5 +1,14 @@
+#!/usr/bin/env python3
+##########################################
+# Unruly Game
+#
+
+#################### INIT PART ####################
 
 import random
+
+
+#################### CLASS PART ####################
 
 class Game :
     """Stores general game parameters"""
@@ -147,72 +156,72 @@ class Game :
             if check == 1 :
                 for i in range(8) :
                     if self.ones_rows[i] != 4 : continue
-                        for r2 in range(8) :
-                            nmatch = 0 ; nonmatch = -1
-                            if self.ones_rows[r2] != 3 : continue
-                            for c in range(8) :
-                                if self.grid[r*rmult + c*cmult] == check :
-                                    if self.grid[r2*rmult + c*cmult] == check :
-                                        nmatch+=1
-                                    else :
-                                        nonmatch = c
-                            if nmatch == 3 :
-                                i1 = r2 * rmult + nonmatch * cmult
-                                self.grid[i1] = block
-                                self.update_counts()
-                                ret+=1
+                    for r2 in range(8) :
+                        nmatch = 0 ; nonmatch = -1
+                        if self.ones_rows[r2] != 3 : continue
+                        for c in range(8) :
+                            if self.grid[i*rmult + c*cmult] == check :
+                                if self.grid[r2*rmult + c*cmult] == check :
+                                    nmatch+=1
+                                else :
+                                    nonmatch = c
+                        if nmatch == 3 :
+                            i1 = r2 * rmult + nonmatch * cmult
+                            self.grid[i1] = block
+                            self.update_counts()
+                            ret+=1
             elif check == 2 :
                 for i in range(8) :
                     if self.zeros_rows[i] != 4 : continue
-                        for r2 in range(8) :
-                            nmatch = 0 ; nonmatch = -1
-                            if self.zeros_rows[r2] != 3 : continue
-                            for c in range(8) :
-                                if self.grid[r*rmult + c*cmult] == check :
-                                    if self.grid[r2*rmult + c*cmult] == check :
-                                        nmatch+=1
-                                    else :
-                                        nonmatch = c
-                            if nmatch == 3 :
-                                i1 = r2 * rmult + nonmatch * cmult
-                                self.grid[i1] = block
-                                self.update_counts()
-                                ret+=1
+                    for r2 in range(8) :
+                        nmatch = 0 ; nonmatch = -1
+                        if self.zeros_rows[r2] != 3 : continue
+                        for c in range(8) :
+                            if self.grid[i*rmult + c*cmult] == check :
+                                if self.grid[r2*rmult + c*cmult] == check :
+                                    nmatch+=1
+                                else :
+                                    nonmatch = c
+                        if nmatch == 3 :
+                            i1 = r2 * rmult + nonmatch * cmult
+                            self.grid[i1] = block
+                            self.update_counts()
+                            ret+=1
         else :
             if check == 1 :
                 for i in range(8) :
                     if self.ones_cols[i] != 4 : continue
-                        for r2 in range(8) :
-                            nmatch = 0 ; nonmatch = -1
-                            if self.ones_cols[r2] != 3 : continue
-                            for c in range(8) :
-                                if self.grid[r*rmult + c*cmult] == check :
-                                    if self.grid[r2*rmult + c*cmult] == check :
-                                        nmatch+=1
-                                    else :
-                                        nonmatch = c
-                            if nmatch == 3 :
-                                i1 = r2 * rmult + nonmatch * cmult
-                                self.grid[i1] = block
-                                self.update_counts()
-                                ret+=1
+                    for r2 in range(8) :
+                        nmatch = 0 ; nonmatch = -1
+                        if self.ones_cols[r2] != 3 : continue
+                        for c in range(8) :
+                            if self.grid[i*rmult + c*cmult] == check :
+                                if self.grid[r2*rmult + c*cmult] == check :
+                                    nmatch+=1
+                                else :
+                                    nonmatch = c
+                        if nmatch == 3 :
+                            i1 = r2 * rmult + nonmatch * cmult
+                            self.grid[i1] = block
+                            self.update_counts()
+                            ret+=1
             elif check == 2 :
                 for i in range(8) :
                     if self.zeros_cols[i] != 4 : continue
-                        for r2 in range(8) :
-                            nmatch = 0 ; nonmatch = -1
-                            if self.zeros_cols[r2] != 3 : continue
-                            for c in range(8) :
-                                if self.grid[r*rmult + c*cmult] == check :
-                                    if self.grid[r2*rmult + c*cmult] == check :
-                                        nmatch+=1
-                                    else :
-                                        nonmatch = c
-                            if nmatch == 3 :
-                                i1 = r2 * rmult + nonmatch * cmult
-                                self.grid[i1] = block
-                                self.update_counts()
-                                ret+=1
+                    for r2 in range(8) :
+                        nmatch = 0 ; nonmatch = -1
+                        if self.zeros_cols[r2] != 3 : continue
+                        for c in range(8) :
+                            if self.grid[i*rmult + c*cmult] == check :
+                                if self.grid[r2*rmult + c*cmult] == check :
+                                    nmatch+=1
+                                else :
+                                    nonmatch = c
+                        if nmatch == 3 :
+                            i1 = r2 * rmult + nonmatch * cmult
+                            self.grid[i1] = block
+                            self.update_counts()
+                            ret+=1
         return ret
 
     def unruly_solver_check_all_near_complete(self) -> int :
@@ -371,90 +380,70 @@ class Game :
                     if self.grid[r*rmult + c*cmult] != self.grid[r2*rmult + c*cmult] : match =False
                 if match :
                     for c in range(8) :
-                    self.errors[r*rmult + c*cmult] |= err
-                    self.errors[r2*rmult + c*cmult] |= err
-                    ret+=1
+                        self.errors[r*rmult + c*cmult] |= err
+                        self.errors[r2*rmult + c*cmult] |= err
+                        ret+=1
         return ret
 
-# this is not called directly, its name is forwarded to the main game struct of sgt_puzzles
-#def solve_game(gms, curst) -> str :
-#
-#    ret :str =""
-#    solved = gms
-#    sc1 = Scratch()
-#
-#    unruly_solve_game(solved, sc1, 3)
-#    result :int = unruly_validate_counts(sc1)
-#    if unruly_validate_all_rows(solved, []) == -1 : result = -1
-#    if result == 0 :
-#        ret = "S"
-#        for i in range(64) : ret+= "1" if solved.grid[i] == 1 else "0"
-#    return ret
 
-
-
-### GENERATOR ###
-
-
-
-def unruly_fill_game(gms, scr) -> bool :
-    """Construct a valid filled grid by repeatedly picking an unfilled space and fill it,
-    then calling the solver to fill in any spaces forced by the change.
-    """
-
-    # Generate random array of spaces
-    s1 = list(range(64))
-    spaces :list =list(())
-    for i in range(64) : spaces.append(s1.pop(random.randint(0,len(s1)-1)))
-    for j in range(64) :
-        i = spaces[j]
-        if gms.grid[i] != 0 : continue
-        if random.randint(0,1) :
-            gms.grid[i] = 1
-            scr.ones_rows[i/8]+=1
-            scr.ones_cols[i%8]+=1
-        else :
-            gms.grid[i] = 2
-            scr.zeros_rows[i/8]+=1
-            scr.zeros_cols[i%8]+=1
-        unruly_solve_game(gms, scr, 3)
-
-    if unruly_validate_all_rows(gms) != 0 or unruly_validate_counts(scr) != 0 : return False
-    return True
-
-
-def new_game_desc(rs, aux :str, interactive :bool) -> None :
-    global gs, sc
-    spaces :list =list(())
-
-    while True :
-
-        while True :
-            gs = Game()
-            sc = Scratch()
-            if unruly_fill_game(gs,sc) : break
+    def generator_fill_game(self) -> bool :
+        """Construct a valid filled grid by repeatedly picking an unfilled space and fill it,
+       then calling the solver to fill in any spaces forced by the change.
+       """
 
         # Generate random array of spaces
         s1 = list(range(64))
-        for i in range(64) : spaces.append(s1.pop(random.randint(0, len(s1) - 1)))
-        # Winnow the clues by starting from our filled grid, repeatedly picking a filled space and emptying it,
-        # as long as the solver reports that the puzzle can still be solved after doing so.
+        spaces :list =list(())
+        for i in range(64) : spaces.append(s1.pop(random.randint(0,len(s1)-1)))
         for j in range(64) :
             i = spaces[j]
-            c = gs.grid[i]
-            gs.grid[i] =0
+            if self.grid[i] != 0 : continue
+            if random.randint(0,1) :
+                self.grid[i] = 1
+                self.ones_rows[i/8]+=1
+                self.ones_cols[i%8]+=1
+            else :
+                self.grid[i] = 2
+                self.zeros_rows[i/8]+=1
+                self.zeros_cols[i%8]+=1
+            self.solve()
 
-            solver = gs
-            scrx = Scratch()
-            unruly_solve_game(solver, scrx, 2)
-            if unruly_validate_counts(scrx) != 0 : gs.grid[i] =c
+        if self.validate_all_rows() != 0 or self.validate_counts() != 0 : return False
+        return True
+
+
+
+#################### PROC PART ####################
+
+
+
+#################### MAIN PART ####################
+
+
+spc :list =list(())
+
+while True :
+
+    while True :
+        g = Game()
+        if g.generator_fill_game() : break
+
+        # Generate random array of spaces
+        s2 = list(range(64))
+        for i8 in range(64) : spc.append(s2.pop(random.randint(0, len(s2) - 1)))
+        # Winnow the clues by starting from our filled grid, repeatedly picking a filled space and emptying it,
+        # as long as the solver reports that the puzzle can still be solved after doing so.
+        for j8 in range(64) :
+            i8 = spc[j8]
+            c8 = g.grid[i8]
+            g.grid[i8] =0
+
+            solver = g
+            solver.solve()
+            if solver.validate_counts() != 0 : g.grid[i8] =c8
 
         # See if the game has accidentally come out too easy.
-        solver = gs
-        scrx = Scratch()
-        unruly_solve_game(solver, scrx, 1)
-        if unruly_validate_counts(scrx) > 0 : break
-
-
-gs = Game()
-sc = Scratch()
+        #solver = gs
+        #scrx = Scratch()
+        #unruly_solve_game(solver, scrx, 1)
+        if solver.validate_counts() > 0 : break
