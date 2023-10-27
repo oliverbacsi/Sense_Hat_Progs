@@ -7,6 +7,8 @@
 
 import random, time, math
 import sense_hat
+import pygame
+import pygame.locals as pgl
 
 # Peg colors the game is allowed to use (6 colors by default) are under '_'
 COLOR :dict = {'R':(240,0,00), 'Y':(200,200,0), 'G':(00,240,0),  'C':(0,200,200), 'B':(0,0,240), 'M':(200,0,200),
@@ -136,13 +138,13 @@ class Game :
 
 
     def handleEvent(self, event) -> None :
-        """Handle the stick events, depending which mode we are in."""
+        """Handle pygame key events, depending which mode we are in."""
         global COLOR
-        if event.action != "pressed" : return
+        if event.type != pgl.KEYDOWN : return
 
         # If player is setting up a guess
         if self.EnterMode :
-            if event.direction == "middle" :
+            if event.key in [pgl.K_SPACE, pgl.K_RETURN] :
                 if self.CurX == 7 :
                     # The player clicked on the "Enter" button, let's check if it is a valid guess
                     _validGuess = True
@@ -174,13 +176,13 @@ class Game :
                     self.EnterMode = False
             else :
                 # Handle stick movements in Editor Mode
-                if event.direction == "left" :
+                if event.key == 276 :
                     self.CurX = (self.CurX-1)%8
                     self.redrawEditedRow()
-                elif event.direction == "right" :
+                elif event.key == 275 :
                     self.CurX = (self.CurX+1)%8
                     self.redrawEditedRow()
-                elif event.direction == "up" :
+                elif event.key == 273 :
                     if self.CurX in range(4) :
                         c = self.GuessInProgress[self.CurX]
                         if c == 'x' :
@@ -188,7 +190,7 @@ class Game :
                         else :
                             self.GuessInProgress[self.CurX] = COLOR['_'][(COLOR['_'].index(c)+1) % len(COLOR['_'])]
                         self.redrawEditedRow()
-                elif event.direction == "down" :
+                elif event.key == 274 :
                     if self.CurX in range(4) :
                         c = self.GuessInProgress[self.CurX]
                         if c == 'x' :
@@ -199,10 +201,10 @@ class Game :
 
         # If player is just browsing between previous guesses
         else :
-            if event.direction == "middle" :
+            if event.key in [pgl.K_SPACE, pgl.K_RETURN] :
                 self.EnterMode = True
             else :
-                dt = {"up":-1, "down":1, "left":0, "right":0}[event.direction]
+                dt = {"273":-1, "274":1, "275":0, "276":0}[str(event.key)]
                 self.ViewStart += dt
                 # Flash if screen can not be scrolled any more
                 if self.ViewStart < 0 :
@@ -216,7 +218,7 @@ class Game :
 
 
 #################### PROC PART ####################
-            
+
 
 def flash(what :str ="scr", colorList :list =[255,255,255]) -> None :
     """Do a warning flash on the screen.
@@ -241,15 +243,16 @@ def flash(what :str ="scr", colorList :list =[255,255,255]) -> None :
 
 s = sense_hat.SenseHat()
 s.clear()
+pygame.init()
+pygame.display.set_mode((400, 400))
 g = Game()
 g.newGame()
-
-s.stick.direction_any = g.handleEvent
 
 
 # Staying within the main loop is basically to blink the cursor as everything else is driven by stick events
 # and handled by embedded methods of the Game object g.
 while g.StayInMainLoop :
+    for event in pygame.event.get(): g.handleEvent(event)
     if g.EnterMode :
         if g.CurX < 4 :
             if g.GuessInProgress[g.CurX] == 'x' :
@@ -282,4 +285,5 @@ for q1 in range(40):
     time.sleep(0.1)
 s.clear()
 s.show_message(f"{len(g.GuessList)} steps used.", text_colour=[60,240,180])
+pygame.quit()
 
