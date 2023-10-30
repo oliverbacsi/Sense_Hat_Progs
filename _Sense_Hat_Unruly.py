@@ -5,8 +5,8 @@
 
 #################### INIT PART ####################
 
-import random
-
+import random, time
+import sense_hat
 
 #################### CLASS PART ####################
 
