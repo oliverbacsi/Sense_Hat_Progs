@@ -37,9 +37,9 @@ class Cell :
     def changeColor(self, newCol :str, animate :bool =False) -> None :
         """Change the color of the cell after its creation.
         Parameters :
-        newCol : The letter of the new color (as str)
-        animate : Whether the change should be highlighted
-        on the screen (as bool, default : False)
+        :param newCol : The letter of the new color (as str)
+        :param animate : Whether the change should be highlighted on the screen (as bool, default : False)
+        :returns : None
         """
         global COLOR
         if newCol not in COLOR.keys() : return
@@ -53,8 +53,9 @@ class Cell :
     def linkNeighbour(self, direction :str, cellObject) -> None :
         """Link the neighbouring cell.
         Parameters :
-        direction : which direction is the neighbour ('N','E','W','S') as str
-        cellObject : the object handle of the neighbouring cell
+        :param direction : which direction is the neighbour ('N','E','W','S') as str
+        :param cellObject : the object handle of the neighbouring cell
+        :returns : None
         """
         if direction in ['N','E','W','S'] : self.Neigh[direction] = cellObject
 
@@ -65,7 +66,8 @@ class Cell :
     def flood(self, newColor :str) -> None:
         """Recursively flood with a new specified color
         Parameters :
-        newColor : the letter index of the new color as str
+        :param newColor : the letter index of the new color as str
+        :returns : None
         """
         if newColor not in COLOR.keys() : return
         if newColor == self.C : return

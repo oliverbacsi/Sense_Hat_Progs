@@ -46,7 +46,7 @@ class Move :
         self.placed = (_r, _c)
         self.flipped :list = []
 
-    def add_to_flipped(self, list_moves):
+    def add_to_flipped(self, list_moves) -> None :
         self.flipped.extend(list_moves)
 
 
@@ -92,9 +92,9 @@ class Board :
     def calc_legal_moves(self, forWhom :int =0):
         """Calculates legal moves by checking every position
         Parameters:
-        forWhom : for which Player should it be calculated. Default: Current turn
-        Returns: list of legal moves for the requested player
-        """
+        :param forWhom : for which Player should it be calculated. Default: Current turn
+        :returns : list of legal moves for the requested player"""
+
         myMoves :list = []
         if not forWhom : forWhom = self.turn
         for i in range(8) :
@@ -108,10 +108,11 @@ class Board :
     def check_pos(self, row :int, col :int, plyr :int):
         """Checks whether current pos is at the end of any line
         Parameters:
-        row : Y position on the board as int
-        col : X position on the board as int
-        plyr : for which player are we checking as int
-        Returns : list of moves as list"""
+        :param row : Y position on the board as int
+        :param col : X position on the board as int
+        :param plyr : for which player are we checking as int
+        :returns : list of moves as list"""
+
         myMoves :list = []
         for Dir in ( (0,1) , (1,1) , (1,0) , (1,-1) , (0,-1) , (-1,-1), (-1,0) , (-1,1) ) :
             row1 = row ; col1 = col ; count = 0
@@ -127,14 +128,14 @@ class Board :
                 col1 += Dir[1] ; row1 += Dir[0]
         return myMoves
 
-    def make_move(self, row :int, col :int, Visualize :bool =False):
+    def make_move(self, row :int, col :int, Visualize :bool =False) -> None :
         """Makes move at a certain position
         Parameters :
-        row : Y position on the board as int
-        col : X position on the board as int
-        Visualize : Demonstrate with highlighted pixels on the screen
-        Returns : None
-        """
+        :param row : Y position on the board as int
+        :param col : X position on the board as int
+        :param Visualize : Demonstrate with highlighted pixels on the screen
+        :returns : None"""
+
         current_move = Move(row,col)
         count :list = list(())
         self.b[row][col] = self.turn
@@ -165,22 +166,21 @@ class Board :
             time.sleep(2)
             draw_board()
 
-    def flip_tiles(self, list_moves):
+    def flip_tiles(self, list_moves) -> None :
         """Flip over a tile at certain positions
         Parameters :
-        list_moves : The coordinate list as a list of iterables
-        Returns : None
-        """
+        :param list_moves : The coordinate list as a list of iterables
+        :returns : None"""
         for pos in list_moves:
             self.b[pos[0]][pos[1]] = (-1)*self.b[pos[0]][pos[1]]
 
-    def undo_move(self):
+    def undo_move(self) -> None :
         """Technical method, it is able to undo a move based on the history list"""
         mov = self.moves.pop()
         self.b[mov.placed[0]][mov.placed[1]] = 0
         self.flip_tiles(mov.flipped)
 
-    def evaluate_board(self):
+    def evaluate_board(self) -> int :
         """Evaluates the board taking into account the weights"""
         score = 0
         for i in range(8):
@@ -191,7 +191,7 @@ class Board :
                     score -= WEIGHTS[i][j]
         return +score
 
-    def computer_move(self):
+    def computer_move(self) -> None :
         """Perform calculations and handle the move at the Computer's turn"""
         global COLOR
         bm = self._get_best_move(0, 4)
@@ -211,9 +211,9 @@ class Board :
     def _get_best_move(self, depth, max_depth):
         """Fetches best move from the possibilities
         Parameters :
-        depth : current level of recursion depth
-        max_depth : max level of recursion depth
-        Returns : the technical score of the step as int"""
+        :param depth : current level of recursion depth
+        :param max_depth : max level of recursion depth
+        :returns : the technical score of the step as int"""
         if self.is_game_over() or depth == max_depth : return self.evaluate_board()
         bmov = None
         # As low as possible

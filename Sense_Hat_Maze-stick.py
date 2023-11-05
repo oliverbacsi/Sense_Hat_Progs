@@ -16,8 +16,9 @@ class Game:
     def __init__(self, SizeX :int =-1, SizeY :int =-1) -> None:
         """Define a new playfield
         Parameters:
-        SizeX :int = Horizontal size
-        SizeY :int = Vertical size"""
+        :param SizeX :int = Horizontal size
+        :param SizeY :int = Vertical size
+        :returns : None"""
 
         global TABLE
         self.SizeX :int = SizeX
@@ -64,8 +65,9 @@ class Game:
     def redrawScreen(self, XOf :int =0, YOf :int =0) -> None:
         """Redraw the whole screen
         Parameters:
-        XOf : The X offset of the map as int
-        YOf : The Y offset of the map as int"""
+        :param XOf : The X offset of the map as int
+        :param YOf : The Y offset of the map as int
+        :returns : None"""
 
         global TABLE
         for i in range(64) : self.V[i] = [0,0,0]
@@ -141,8 +143,9 @@ class Cell:
     def __init__(self, X :int =-1, Y :int =-1) -> None:
         """Define one cell element
         Parameters:
-        X :int = X coordinate of the cell
-        Y :int = Y coordinate of the cell"""
+        :param X :int = X coordinate of the cell
+        :param Y :int = Y coordinate of the cell
+        :returns : None"""
 
         self.X   :int = X
         self.Y   :int = Y
@@ -154,8 +157,10 @@ class Cell:
     def draw(self, wx :int, wy :int) -> None:
         """Add the cell to the desired position to the Pixel Vector.
         Parameters:
-        wx :int = X coordinate of the top-left corner
-        wy :int = Y coordinate of the top-left corner"""
+        :param wx :int = X coordinate of the top-left corner
+        :param wy :int = Y coordinate of the top-left corner
+        :returns : None"""
+
         if wx in range(8) and wy in range(8) :
             g.V[wx+8*wy] = getWallColor(self.Special, self.Route, self.Visited)
         if wx+1 in range(8) and wy in range(8) :
@@ -205,8 +210,9 @@ class Cell:
     def makeSpecial(self, Artifact :str) -> None:
         """Change the cell to a special one.
         Parameters:
-        Artifact :str = What is so special on this cell
-        (accepted: S, E, R, Y, G)"""
+        :param Artifact :str = What is so special on this cell
+        (accepted: S, E, R, Y, G)
+        :returns : None"""
         if Artifact[0].upper() in ['S', 'E', 'R', 'Y', 'G'] :
             self.Special = Artifact[0].upper()
         else :
@@ -219,8 +225,10 @@ class Player:
     def __init__(self, PosX :int =-1, PosY :int =-1) -> None:
         """Initialize a player with a given position and empty route
         Parameters:
-        PosX :int = Horizontal position
-        PosY :int = Vertical position"""
+        :param PosX :int = Horizontal position
+        :param PosY :int = Vertical position
+        :returns : None"""
+
         self.X :int = PosX
         self.Y :int = PosY
         self.Route :list = list(())
@@ -234,7 +242,8 @@ class Player:
     def step(self, Dir :str ="") -> None:
         """Try to step with the player into a certain direction
         Parameters:
-        Dir :str = Stepping direction [U/D/L/R or N/S/W/E]"""
+        :param Dir :str = Stepping direction [U/D/L/R or N/S/W/E]
+        :returns : None"""
 
         global TABLE
         newX :int = self.X
@@ -285,10 +294,11 @@ class Player:
 def recurGenWalls(L: int, T: int, R: int, B: int) -> None:
     """Recursively generate walls by splitting the free rectangled areas
     Parameters:
-    L :int = Leftmost cell of the area
-    T :int = Top cell of the area
-    R :int = Rightmost cell of the area
-    B :int = Bottom cell of the area"""
+    :param L :int = Leftmost cell of the area
+    :param T :int = Top cell of the area
+    :param R :int = Rightmost cell of the area
+    :param B :int = Bottom cell of the area
+    :returns : None"""
 
     global TABLE
 
@@ -318,7 +328,9 @@ def recurGenWalls(L: int, T: int, R: int, B: int) -> None:
 def getArtifactColor(a: str) -> list :
     """Return the color of a specific artifact or feature.
     Parameters:
-    a : Letter of the Artifact as str"""
+    :param a : Letter of the Artifact as str
+    :returns : None"""
+
     if not a : return [0,0,0]
     if a.upper() == "E" : return [240,0,240]
     if a.upper() == "R" : return [240,0,0]
@@ -334,9 +346,11 @@ def getWallColor(s, r, v) -> list :
     turned back to normal, but leaving it a special room
     with a special color helps the player to orientate.
     Parameters:
-    s : Character of the Special artifact as str
-    r : Whether the room is on the shortest route as bool
-    v : Whether the room has been visited already as bool"""
+    :param s : Character of the Special artifact as str
+    :param r : Whether the room is on the shortest route as bool
+    :param v : Whether the room has been visited already as bool
+    :returns : None"""
+
     tlim = 110 if s else 60   # If special cell the wall colors get brighter
     blim = 80 if s else 48
     RC = random.randint(blim,tlim)
@@ -374,8 +388,9 @@ def move_R(event) :
 def getDist(X :str) -> float :
     """Get the player's distance to a special cell.
     Parameters:
-    X : the character of the artifact as str
-    Returns : Distance in cells as float"""
+    :param X : the character of the artifact as str
+    :returns : Distance in cells as float"""
+
     dx = p.X - g.SpecCoord[X][0]
     dy = p.Y - g.SpecCoord[X][1]
     ret :float = math.sqrt( dx*dx + dy*dy )

@@ -95,9 +95,9 @@ class Game :
     def recalcResults(self, itemNum :int =-1) -> None :
         """Calculate the results of a guess or all guesses.
         Params:
-        itemNum : Which item in the list to calculate, as int
+        :param itemNum : Which item in the list to calculate, as int
         (defaults to -1, which means all items.)
-        Returns: None"""
+        :returns : None"""
 
         # If there is no guess made, just return silently
         if not len(self.GuessList) : return
@@ -203,7 +203,7 @@ class Game :
         else :
             if event.key in [pgl.K_SPACE, pgl.K_RETURN] :
                 self.EnterMode = True
-            else :
+            elif event.key in range(273,277) :
                 dt = {"273":-1, "274":1, "275":0, "276":0}[str(event.key)]
                 self.ViewStart += dt
                 # Flash if screen can not be scrolled any more
@@ -223,9 +223,9 @@ class Game :
 def flash(what :str ="scr", colorList :list =[255,255,255]) -> None :
     """Do a warning flash on the screen.
     Params:
-    what : "top" row, "bot" row, or "scr" for whole screen (default)
-    colorList : The [R,G,B] color list of the flash. (default: bright white)
-    Returns: None"""
+    :param what : "top" row, "bot" row, or "scr" for whole screen (default)
+    :param colorList : The [R,G,B] color list of the flash. (default: bright white)
+    :returns : None"""
     # Save the image from the screen first
     save :list = s.get_pixels()
     if what == "scr" :
@@ -286,4 +286,3 @@ for q1 in range(40):
 s.clear()
 s.show_message(f"{len(g.GuessList)} steps used.", text_colour=[60,240,180])
 pygame.quit()
-

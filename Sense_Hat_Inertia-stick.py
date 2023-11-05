@@ -13,10 +13,10 @@
 
 #################### INIT PART ####################
 
-import random, time
+import random, time, math
 import sense_hat
 
-COLOROF :dict = {'b':[0,0,48], 'w':[48,48,48], 'g':[0,220,110], 'm':[220,0,110], 'S':[0,0,48], 's':[48,48,0], '@':[255,255,255]}
+COLOROF :dict = {'b':[0,0,48], 'w':[65,65,65], 'g':[0,220,80], 'm':[220,0,0], 'S':[0,0,48], 's':[48,48,0], '@':[255,255,255]}
 
 #################### CLASS PART ####################
 
@@ -51,18 +51,23 @@ class Game :
 
     def _can_go(self, x1: int, y1 :int, d1 :int, x2 :int, y2 :int, d2 :int) -> bool :
         """Check if we can go from (x1,y1) direction d1 to (x2,y2) direction d2"""
-        Here :str = self.Grid[x1+y1*8].Content
-        Next :str = self.Grid[x1+dX(d1)+(y1+dY(d1))*8].Content
-        There :str = self.Grid[x2+y2*8].Content
+        xn :int = x1+dX(d1)
+        yn :int = y1+dY(d1)
 
         # If we are standing on a wall or mine, no move is possible
+        Here :str = self.Grid[x1+y1*8].Content
         if Here in ['w', 'm'] : return False
 
         # If we are capable to stop at x1,y1 then we can change direction so it is true
+        if xn in range(8) and yn in range(8) :
+            Next :str = self.Grid[x1+dX(d1)+(y1+dY(d1))*8].Content
+        else :
+            Next :str = 'w'
         if x2 == x1 and y2 == y1 and (Here in ['s', 'S'] or Next =='w') : return True
 
         # If we are capable to move 1 step and the direction is the same, then step
-        if x2 == x1+dX(d1) and y2 == y1+dY(d1) and d2 == d1 and There in ['b', 'g', 's', 'S'] : return True
+        There :str = self.Grid[x2+y2*8].Content
+        if x2 == xn and y2 == yn and d2 == d1 and There in ['b', 'g', 's', 'S'] : return True
 
         return False
 
@@ -77,7 +82,7 @@ class Game :
             head =0 ; tail =0
 
             for _dir in range(8) :
-                if sign > 1 :
+                if sign > 0 :
                     self.Grid[self.sX+8*self.sY].reachable_from[_dir] = True
                 else :
                     self.Grid[self.sX+8*self.sY].reachable_to[_dir] = True
@@ -95,19 +100,20 @@ class Game :
                         _d2 = _dir
                     else :
                         _x2 = _x ; _y2 = _y ; _d2 = n
-                    if sign > 1 :
+                    if _x2 not in range(8) or _y2 not in range(8) : continue
+                    if sign > 0 :
                         _r = self.Grid[_x2+8*_y2].reachable_from[_d2]
                     else :
                         _r = self.Grid[_x2+8*_y2].reachable_to[_d2]
                     if _x2 in range(8) and _x2 in range(8) and not _r :
-                        if sign > 1 :
+                        if sign > 0 :
                             ok = self._can_go(_x, _y, _dir, _x2, _y2, _d2)
                         else :
                             ok = self._can_go(_x2, _y2, _d2, _x, _y, _dir)
                         if ok :
                             self.positions.append((_x2, _y2, _d2))
                             tail +=1
-                            if sign > 1 :
+                            if sign > 0 :
                                 self.Grid[_x2+8*_y2].reachable_from[_d2] = True
                             else :
                                 self.Grid[_x2+8*_y2].reachable_to[_d2] = True
@@ -272,8 +278,8 @@ class Cell :
 
 
 
-
 #################### PROC PART ####################
+
 
 def dX(_dir: int) -> int :
     """Return the delta-X value for a direction.
@@ -323,6 +329,18 @@ def handleEvent(event) -> None :
         g.redrawGrid()
         g.cE = True
 
+def fadeAway() -> None :
+    """Fade the current screen away."""
+    V = s.get_pixels()
+    for q1 in range(40):
+        for q2 in range(64):
+            (rx, gx, bx) = V[q2]
+            rx = math.floor(rx * 0.95) ; gx = math.floor(gx * 0.95) ; bx = math.floor(bx * 0.95)
+            V[q2] = [rx, gx, bx]
+        s.set_pixels(V)
+        time.sleep(0.1)
+    s.clear()
+
 
 
 #################### MAIN PART ####################
@@ -348,19 +366,21 @@ while g.Status == 'r' :
 
 
 if g.Status == 'd' :
-    for i in range(3) :
+    for z in range(3) :
         s.clear([255,100,100])
         time.sleep(0.3)
         s.clear()
         time.sleep(0.3)
     g.redrawGrid()
-    time.sleep(5)
+    time.sleep(3)
+    fadeAway()
     s.show_message("You stepped on a mine!",text_colour=[255,100,100],back_colour=[48,0,0])
 else :
     s.clear([0, 220, 80])
     time.sleep(1)
     g.redrawGrid()
-    time.sleep(5)
+    time.sleep(3)
+    fadeAway()
     s.show_message("You won!",text_colour=[100,255,100],back_colour=[0,48,0])
 
 s.clear()
