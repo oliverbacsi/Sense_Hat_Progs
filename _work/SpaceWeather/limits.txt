@@ -1,0 +1,38 @@
+Kp : 0-4 kék, 5 sárga, fölötte piros.
+    0,1 -> 1 , kék
+    2,3 -> 2 , zöld
+    4,5 -> 3 , sárga
+    6   -> 4 , nari
+    7   -> 5 , piros
+    8   -> 6 , piros
+    9   -> 7 , piros
+
+X-Ray :  B zöld, C sárga, M nari , X piros
+    0.0-1.99 -> 1
+    2.0-3.99 -> 2
+    4.0-5.99 -> 3
+    6.0-6.99 -> 4
+    7.0-7.99 -> 5
+    8.0-8.99 -> 6
+    9.0-     -> 7
+
+E1 : 1e6 alatt zöld,  1e6-1e7 sárga,  1e7 fölött piros
+E2 : 1e3 alatt zöld,  1e3-1e4 sárga,  1e4 fölött piros
+csak 1db E jön, legyen E1 ???
+
+P1 : 1e2 1e3
+P2 : 0.5e0 0.5e1
+P3 : 0.3e0 0.3e1
+
+
+
+ppp.e..S
+777777.7
+666666.6
+555555.5
+444444.4
+333333.3
+222222.2
+111111.1
+000000.0
+

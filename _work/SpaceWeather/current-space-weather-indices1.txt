@@ -1,0 +1,36 @@
+:Product: Current Space Weather Indices curind.txt
+:Issued: 2023 Nov 06 1034 UTC
+# Prepared by the US Dept. of Commerce, NOAA, Space Weather Prediction Center
+# Product description and SWPC contact on the Web
+# https://www.spaceweather.gov
+#
+#                       Current Space Weather Indices
+:Solar_Radio_Flux: 2023 Nov 06
+#      Learmonth  San Vito   Sag Hill  Penticton  Penticton  Palehua  Penticton
+#        0400       1000       1700       1700       2000       2300       2300
+  245     33         -1         -1         -1         -1         -1         -1
+  410     43         -1         -1         -1         -1         -1         -1
+  610     69         -1         -1         -1         -1         -1         -1
+ 1415    110         -1         -1         -1         -1         -1         -1
+ 2695    144         -1         -1         -1         -1         -1         -1
+ 2800     -1         -1         -1         -1         -1         -1         -1
+ 4995    198         -1         -1         -1         -1         -1         -1
+ 8800    273         -1         -1         -1         -1         -1         -1
+15400    560         -1         -1         -1         -1         -1         -1
+#
+#
+:Energetic_Particle_Flux:
+#
+# Current Readings
+#      GOES Proton Flux          GOES Electron Flux    GOES    GOES     Neutron
+# ----- Protons/cm2-s-sr -----  -Electrons/cm2-s-sr -  X-ray  Location  Monitor
+#   >1 MeV   >10 MeV  >100 MeV         >2 MeV          flux     West    cts/min
+  1.38e+01  2.00e-01  1.92e-01        4.00e+00       1.28e-06   75.2      -1
+#
+#
+:Geomagnetic_Values: 2023 Nov 06
+#
+#          Middle Latitude                                 Estimated
+#------------- Boulder -------------     ----------------- Planetary -------------------
+#Running A   03-06-09-12-15-18-21-24       03  - 06  - 09  - 12  - 15  - 18  - 21  - 24
+    44        4  5  4 -1 -1 -1 -1 -1     4.33  5.67  4.67  -1.00 -1.00 -1.00 -1.00 -1.00 

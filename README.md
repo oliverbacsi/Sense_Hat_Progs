@@ -23,9 +23,43 @@ Colorful shiny stars pop up randomly and later also extinct randomly.
 
 Similar to Starry Night 1, but the colorful stars poppig up are "Supernovas", so they appear bright and then slowly fade away during their existence until they completely disappear in the background.
 
+###Fire
+
+Simulate a flaming fire.
+
+
 ###Air Data
 
-Display Temperature, Humidity and Air Pressure as different color scrolling texts on the 8x8 dot matrix screen.
+Display Temperature, Humidity and Air Pressure as different color texts and bar charts on the 8x8 LED display.
+1 column is 1 hour in the history. Values are normed to min-max. Pressure center line is latest value.
+
+
+###Space Weather
+
+Retrieve Space Weather Data from NOAA and display the status.
+The **top row** of the 8x8 LED display will be the Particle Flux status and data readiness status:
+
+* **High Energy Proton Flux** (>1MeV, >10MeV and >100MeV) displayed in the top-left corner: `p1`, `p2`, `p3`
+* **High Energy Electron Flux** (>2MeV) displayed middle of the top row `e1`
+* **Data Validity Status** is in the top-right corner as a blinker `ST`
+
+On the main part of the screen there are the bar charts:
+
+* **X-Ray Status** is in the rightmost column `xr`, separated: Columm color represents: `B`-Green, `C`-Yellow, `M`-Orange, `X`-Red
+* **Kp Status** is on the left side `kp`: the last 6 of the 3 hrs values displayed as columns
+
+|p1|p2|p3|  |e1|  |  |ST|
+|--|--|--|--|--|--|--|--|
+|kp|kp|kp|kp|kp|kp|  |xr|
+|kp|kp|kp|kp|kp|kp|  |xr|
+|kp|kp|kp|kp|kp|kp|  |xr|
+|kp|kp|kp|kp|kp|kp|  |xr|
+|kp|kp|kp|kp|kp|kp|  |xr|
+|kp|kp|kp|kp|kp|kp|  |xr|
+|kp|kp|kp|kp|kp|kp|  |xr|
+
+For a detailed description what the values mean please visit NOAA home page.
+
 
 
 ---
@@ -51,6 +85,8 @@ The exit cell will show up light magenta, enlightening the whole room with magen
 The right edge of the screen is some kind of "Item Radar" showing which item is the closest and how far is it measured directly (not following the route) -- giving You a hint which direction the closest feature is.
 The color of the bar is the color of the item that is closest, and the length and brightness of the bar hints the distance. (first the bar is dark, going from 0-8, then a bright bar is overlapping it going 0-8)
 Until You don't have all the keys the radar will only show You the closest key not taking care about the exit as You can not exit any way without all 3 keys. When You get all 3 keys the radar will only mind about the exit as having all 3 keys enables You to exit.
+
+In the pygame version pressing the 'A' key will dump the full maze on the terminal as ANSI art.
 
 
 ###Reversi

@@ -139,6 +139,83 @@ class Game:
         s.set_pixels(self.V)
 
 
+    def exportANSI(self) -> None:
+        """Dump the maze status as an ANSI art on the stdout.
+        :returns : None"""
+
+        global TABLE
+
+        ANSI :list = []
+        CHAR :list = []
+        for j in range(self.SizeY*2+1) :
+            CHAR.append("#"*(self.SizeX*2+1))
+            ANSI.append(["0;34"]*(self.SizeX*2+1))
+        #Walls come first: None, Visited, Route, Specials
+        LS :list =list(())
+        LR :list =list(())
+        LV :list =list(())
+        LN :list =list(())
+        for j in range(self.SizeY):
+            for i in range(self.SizeX):
+                co = TABLE[str(i)+","+str(j)]
+                if co.Special :
+                    LS.append([co,i,j])
+                elif co.Route :
+                    LR.append([co,i,j])
+                elif co.Visited :
+                    LV.append([co,i,j])
+                else :
+                    LN.append([co,i,j])
+        for (co,i,j) in LN :
+            if co.allow['U'] : CHAR[j*2][i*2+1] =" "
+            if co.allow['D'] : CHAR[j*2+2][i*2+1] =" "
+            if co.allow['L'] : CHAR[j*2+1][i*2] =" "
+            if co.allow['R'] : CHAR[j*2+1][i*2+2] =" "
+            CHAR[j*2+1][i*2+1] =" "
+        for (co,i,j) in LV :
+            if co.allow['U'] : CHAR[j*2][i*2+1] =" "
+            if co.allow['D'] : CHAR[j*2+2][i*2+1] =" "
+            if co.allow['L'] : CHAR[j*2+1][i*2] =" "
+            if co.allow['R'] : CHAR[j*2+1][i*2+2] =" "
+            CHAR[j*2+1][i*2+1] =" "
+            for l in range(3) :
+                for k in range(3) :
+                    ANSI[j*2+l][i*2+k] ="0;32"
+        for (co,i,j) in LR :
+            if co.allow['U'] : CHAR[j*2][i*2+1] =" "
+            if co.allow['D'] : CHAR[j*2+2][i*2+1] =" "
+            if co.allow['L'] : CHAR[j*2+1][i*2] =" "
+            if co.allow['R'] : CHAR[j*2+1][i*2+2] =" "
+            CHAR[j*2+1][i*2+1] =" "
+            for l in range(3) :
+                for k in range(3) :
+                    ANSI[j*2+l][i*2+k] ="0;33"
+        for (co,i,j) in LS :
+            if co.allow['U'] : CHAR[j*2][i*2+1] =" "
+            if co.allow['D'] : CHAR[j*2+2][i*2+1] =" "
+            if co.allow['L'] : CHAR[j*2+1][i*2] =" "
+            if co.allow['R'] : CHAR[j*2+1][i*2+2] =" "
+            CHAR[j*2+1][i*2+1] ={'S':'>', 'E':'O', 'R':'K', 'Y':'K', 'G':'K'}[self.Special]
+            for l in range(3) :
+                for k in range(3) :
+                    ANSI[j*2+l][i*2+k] ={'S':'1;36;46', 'E':'1;35;45', 'R':'1;31;41', 'Y':'1;33;43', 'G':'1;32;42'}[self.Special]
+
+        #Player gets drawn as last, to overwrite everything
+        CHAR[p.Y*2+1][p.X*2+1] = '@'
+        ANSI[p.Y*2+1][p.X*2+1] = "1;37"
+
+        PrevAnsi :str =""
+        for j in range(self.SizeY*2+1) :
+            for i in range(self.SizeX*2+1) :
+                if PrevAnsi != ANSI[j][i] :
+                    PrevAnsi = ANSI[j][i]
+                    print(f"\x1b[{PrevAnsi}m", end="")
+                print(CHAR[j][i],end="")
+            print("\x1b[0m")
+            PrevAnsi =""
+        print("")
+
+
 
 class Cell:
 
@@ -383,9 +460,11 @@ def handle_event(event) -> None :
     """Handle pygame keypress events"""
     if event.type != pgl.KEYDOWN : return
     ek = str(event.key)
-    if ek not in ["273", "274", "275", "276"] : return
-    dt = {"273":'U' , "274":'D' , "276":'L' , "275":'R'}[ek]
-    p.step(dt)
+    if ek in ["273", "274", "275", "276"] :
+        dt = {"273":'U' , "274":'D' , "276":'L' , "275":'R'}[ek]
+        p.step(dt)
+    elif ek == "97" :
+        g.exportANSI()
 
 
 def getDist(X :str) -> float :

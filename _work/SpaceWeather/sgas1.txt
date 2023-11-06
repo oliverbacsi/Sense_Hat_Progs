@@ -1,0 +1,29 @@
+:Product: Solar and Geophysical Activity Summary
+:Issued: 2023 Nov 06 0245 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar and Geophysical Activity Summary
+SGAS Number 310 Issued at 0245Z on 06 Nov 2023
+This report is compiled from data received at SWO on 05 Nov
+A.  Energetic Events
+Begin  Max  End  Rgn   Loc   Xray  Op 245MHz 10cm   Sweep
+ 0909 0909 0909                       150                           
+ 1134 1143 1147  3480 S09E53 M1.8  1n                               
+ 1424 1432 1436  3480        M1.6            140                    
+ 2023 2023 2023                       110                           
+B.  Proton Events:  None
+C.  Geomagnetic Activity Summary:  Field conditions were at quiet to
+strong geomagetic levels due to effects from multiple CMEs.
+D.  Stratwarm:  Not Available
+E.  Daily Indices: (real-time preliminary/estimated values)
+10 cm 155  SSN 081  Afr/Ap 030/075   X-ray Background B9.6
+Daily Proton Fluence (flux accumulation over 24 hrs)
+GT 1 MeV 1.9e+07   GT 10 MeV 2.1e+04 p/(cm2-ster-day)
+(GOES-16 satellite synchronous orbit W75 degrees)
+Daily Electron Fluence
+GT 2 MeV 1.10e+06 e/(cm2-ster-day)
+(GOES-16 satellite synchronous orbit W75 degrees)
+3 Hour K-indices:
+Boulder 3 2 2 5 5 6 5 4 Planetary 3 2 0 6 6 8 8 4 
+F.  Comments:  None
