@@ -167,41 +167,41 @@ class Game:
                 else :
                     LN.append([co,i,j])
         for (co,i,j) in LN :
-            if co.allow['U'] : CHAR[j*2][i*2+1] =" "
-            if co.allow['D'] : CHAR[j*2+2][i*2+1] =" "
-            if co.allow['L'] : CHAR[j*2+1][i*2] =" "
-            if co.allow['R'] : CHAR[j*2+1][i*2+2] =" "
-            CHAR[j*2+1][i*2+1] =" "
+            if co.allow['U'] : CHAR[j*2]   = CHAR[j*2][0:i*2+1]   + " " + CHAR[j*2][i*2+2:]
+            if co.allow['D'] : CHAR[j*2+2] = CHAR[j*2+2][0:i*2+1] + " " + CHAR[j*2+2][i*2+2:]
+            if co.allow['L'] : CHAR[j*2+1] = CHAR[j*2+1][0:i*2]   + " " + CHAR[j*2+1][i*2+1:]
+            if co.allow['R'] : CHAR[j*2+1] = CHAR[j*2+1][0:i*2+2] + " " + CHAR[j*2+1][i*2+3:]
+            CHAR[j*2+1] = CHAR[j*2+1][0:i*2+1] + " " + CHAR[j*2+1][i*2+2:]
         for (co,i,j) in LV :
-            if co.allow['U'] : CHAR[j*2][i*2+1] =" "
-            if co.allow['D'] : CHAR[j*2+2][i*2+1] =" "
-            if co.allow['L'] : CHAR[j*2+1][i*2] =" "
-            if co.allow['R'] : CHAR[j*2+1][i*2+2] =" "
-            CHAR[j*2+1][i*2+1] =" "
+            if co.allow['U'] : CHAR[j*2]   = CHAR[j*2][0:i*2+1]   + " " + CHAR[j*2][i*2+2:]
+            if co.allow['D'] : CHAR[j*2+2] = CHAR[j*2+2][0:i*2+1] + " " + CHAR[j*2+2][i*2+2:]
+            if co.allow['L'] : CHAR[j*2+1] = CHAR[j*2+1][0:i*2]   + " " + CHAR[j*2+1][i*2+1:]
+            if co.allow['R'] : CHAR[j*2+1] = CHAR[j*2+1][0:i*2+2] + " " + CHAR[j*2+1][i*2+3:]
+            CHAR[j*2+1] = CHAR[j*2+1][0:i*2+1] + " " + CHAR[j*2+1][i*2+2:]
             for l in range(3) :
                 for k in range(3) :
                     ANSI[j*2+l][i*2+k] ="0;32"
         for (co,i,j) in LR :
-            if co.allow['U'] : CHAR[j*2][i*2+1] =" "
-            if co.allow['D'] : CHAR[j*2+2][i*2+1] =" "
-            if co.allow['L'] : CHAR[j*2+1][i*2] =" "
-            if co.allow['R'] : CHAR[j*2+1][i*2+2] =" "
-            CHAR[j*2+1][i*2+1] =" "
+            if co.allow['U'] : CHAR[j*2]   = CHAR[j*2][0:i*2+1]   + " " + CHAR[j*2][i*2+2:]
+            if co.allow['D'] : CHAR[j*2+2] = CHAR[j*2+2][0:i*2+1] + " " + CHAR[j*2+2][i*2+2:]
+            if co.allow['L'] : CHAR[j*2+1] = CHAR[j*2+1][0:i*2]   + " " + CHAR[j*2+1][i*2+1:]
+            if co.allow['R'] : CHAR[j*2+1] = CHAR[j*2+1][0:i*2+2] + " " + CHAR[j*2+1][i*2+3:]
+            CHAR[j*2+1] = CHAR[j*2+1][0:i*2+1] + " " + CHAR[j*2+1][i*2+2:]
             for l in range(3) :
                 for k in range(3) :
                     ANSI[j*2+l][i*2+k] ="0;33"
         for (co,i,j) in LS :
-            if co.allow['U'] : CHAR[j*2][i*2+1] =" "
-            if co.allow['D'] : CHAR[j*2+2][i*2+1] =" "
-            if co.allow['L'] : CHAR[j*2+1][i*2] =" "
-            if co.allow['R'] : CHAR[j*2+1][i*2+2] =" "
-            CHAR[j*2+1][i*2+1] ={'S':'>', 'E':'O', 'R':'K', 'Y':'K', 'G':'K'}[self.Special]
+            if co.allow['U'] : CHAR[j*2]   = CHAR[j*2][0:i*2+1]   + " " + CHAR[j*2][i*2+2:]
+            if co.allow['D'] : CHAR[j*2+2] = CHAR[j*2+2][0:i*2+1] + " " + CHAR[j*2+2][i*2+2:]
+            if co.allow['L'] : CHAR[j*2+1] = CHAR[j*2+1][0:i*2]   + " " + CHAR[j*2+1][i*2+1:]
+            if co.allow['R'] : CHAR[j*2+1] = CHAR[j*2+1][0:i*2+2] + " " + CHAR[j*2+1][i*2+3:]
+            CHAR[j*2+1] = CHAR[j*2+1][0:i*2+1] + {'S':'>', 'E':'O', 'R':'K', 'Y':'K', 'G':'K'}[co.Special] + CHAR[j*2+1][i*2+2:]
             for l in range(3) :
                 for k in range(3) :
-                    ANSI[j*2+l][i*2+k] ={'S':'1;36;46', 'E':'1;35;45', 'R':'1;31;41', 'Y':'1;33;43', 'G':'1;32;42'}[self.Special]
+                    ANSI[j*2+l][i*2+k] ={'S':'1;36;46', 'E':'1;35;45', 'R':'1;31;41', 'Y':'1;33;43', 'G':'1;32;42'}[co.Special]
 
         #Player gets drawn as last, to overwrite everything
-        CHAR[p.Y*2+1][p.X*2+1] = '@'
+        CHAR[p.Y*2+1] = CHAR[p.Y*2+1][0:p.X*2+1] + '@' + CHAR[p.Y*2+1][p.X*2+2:]
         ANSI[p.Y*2+1][p.X*2+1] = "1;37"
 
         PrevAnsi :str =""

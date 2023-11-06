@@ -170,3 +170,7 @@ Most of the procedures are already inter-coded from the C++ version of the sgt-p
 
 Experienced a bug: Close to the end of the game most of the game field was already blue (human player), so blue player didn't have a chance to put a tile (the blue question mark appeared correctly), while the red player (computer) had one single possibility to put the tile. But somehow the computer player didn't perform the move, but a red question mark appeared as if the computer player also didn't have the chance the move. Surprisingly the game was not over, so when the program was evaluating the "Game Over" condition, then it saw the possibility for the computer player to move, but when it was the computer player's turn, the algorhythm didn't find the correct move.... Strange...
 
+###SpaceWeather
+
+May be the daily geomagnetic data should be retrieved from a different file rather than the daily summary report.
+As well as the particle flux should be retrieved completely from the indices file. Although this will require to set up new tresholds.

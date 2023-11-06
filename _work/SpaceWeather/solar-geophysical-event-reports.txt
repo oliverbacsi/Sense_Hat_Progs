@@ -1,0 +1,47 @@
+:Product: 20231106events.txt
+:Created: 2023 Nov 06 2302 UT
+:Date: 2023 11 06
+# Prepared by the U.S. Dept. of Commerce, NOAA, Space Weather Prediction Center
+# Please send comments and suggestions to SWPC.Webmaster@noaa.gov 
+#
+# Missing data: ////
+# Updated every 5 minutes.
+#                            Edited Events for 2023 Nov 06
+#
+#Event    Begin    Max       End  Obs  Q  Type  Loc/Frq   Particulars       Reg#
+#-------------------------------------------------------------------------------
+
+9010 +     0021   0028      0039  G16  5   XRA  1-8A      C2.5    8.2E-04   3472
+
+9020 +     0103   0112      0120  G16  5   XRA  1-8A      C4.7    3.6E-03   3472
+
+9030 +     0209   0217      0241  G16  5   XRA  1-8A      C1.7    6.9E-04   3472
+
+9040 +     0253   0300      0308  G16  5   XRA  1-8A      C2.1    6.7E-04   3474
+9040       0255   ////      0255  PAL  C   RSP  109-180   III/1                 
+
+9050 +     0322   0330      0338  G16  5   XRA  1-8A      C9.3    4.6E-04   3472
+
+9060 +     0508   0512      0517  G16  5   XRA  1-8A      C1.5    7.6E-04   3480
+
+9070 +     0547   0602      0609  G16  5   XRA  1-8A      C3.5    2.9E-03   3472
+
+9080 +     0646   ////      0718  LEA  2   EPL  ////      0.31                  
+9080 +     0704   0714      0723  G16  5   XRA  1-8A      C1.5    3.6E-04   3472
+
+9100 +     0723   0730      0738  G16  5   XRA  1-8A      C2.6    8.2E-04   3472
+
+9090 +     0746   0751      0756  G16  5   XRA  1-8A      C2.9    1.6E-03   3480
+9090 +     0748   0749      0756  SVI  3   FLA  S08E41    SF                3480
+
+9110       0857   ////      0857  SVI  C   RSP  115-180   III/1                 
+9110 +     0857   0857      0857  SVI  G   RBR  245       100                   
+
+9120       0909   ////      0910  SVI  C   RSP  115-180   III/1                 
+
+9130       1114   ////      1114  SVI  C   RSP  054-083   III/1                 
+
+9140 +     1259   ////      1300  SVI  C   RSP  025-082   III/1                 
+
+9150 +     1347   1402      1408  G16  5   XRA  1-8A      C3.6    2.5E-03   3474
+9150 +     1356   1359      1407  HOL  3   FLA  S16W81    SF                3474

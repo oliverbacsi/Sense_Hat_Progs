@@ -8,14 +8,14 @@
 #
 
 import re, time, urllib.request
-#import sense_hat
+import sense_hat
 
 
 # Set this to the download interval in seconds. Default=900 (15 mins)
 DOWNLOADINTERVAL :int = 900
 
 # Color scheme. You can change the palette by finetuning this:
-COLOR :dict = {'red':[220,0,0], 'orange':[200,100,0], 'yellow':[180,180,0], 'green':[0,220,0], 'blue':[0,220,80], 'B':[0,220,0], 'C':[180,180,0], 'M':[200,100,0], 'X':[220,0,0], 'KpBG':[0,0,48], 'BlBG':[0,0,48], 'XRBG':[0,0,48]}
+COLOR :dict = {'red':[220,0,0], 'orange':[200,100,0], 'yellow':[180,180,0], 'green':[0,220,0], 'blue':[0,80,220], 'B':[0,220,0], 'C':[180,180,0], 'M':[200,100,0], 'X':[220,0,0], 'KpBG':[0,0,48], 'BlBG':[0,0,48], 'XRBG':[0,0,48]}
 
 
 
@@ -158,10 +158,10 @@ class SpWeather :
         s.set_pixel(5,0, [0,0,0])
 
         # Separator column between Kp and X-Ray
-        for _j in range(8) : s.set_pixel(6,j,[0,0,0])
+        for _j in range(8) : s.set_pixel(6,_j,[0,0,0])
 
         # X-Ray bar on the right edge. Color based on the letter
-        for _j in range(1,8) : s.set_pixel(7,j,COLOR['XRBG'])
+        for _j in range(1,8) : s.set_pixel(7,_j,COLOR['XRBG'])
         for _lim,_pix in [[-1.0, 7], [1.999, 6], [3.999, 5], [5.999, 4], [6.999, 3], [7.999, 2], [8.999, 1]] :
             if self.XV > _lim : s.set_pixel(7,_pix,COLOR[self.XL])
 
