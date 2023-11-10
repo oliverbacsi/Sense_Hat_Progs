@@ -2,12 +2,13 @@
 ##################################################
 # Starry Night 2
 
-import sense_hat
 from random import randint as r
 from time import sleep
+#from _sense_hat_ANSI import SenseHat
+from sense_hat import SenseHat
 
-s=sense_hat.SenseHat()
-s.clear((0,0,48))
+s=SenseHat()
+s.clear([0,0,48])
 V = s.get_pixels()
 Fade :float =0.97
 

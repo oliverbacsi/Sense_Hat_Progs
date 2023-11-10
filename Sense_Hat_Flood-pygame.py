@@ -4,9 +4,10 @@
 #
 
 import random,time
-import sense_hat
 import pygame
 import pygame.locals as pgl
+#from _sense_hat_ANSI import SenseHat
+from sense_hat import SenseHat
 
 #################### INIT PART ####################
 
@@ -183,7 +184,7 @@ def handle_event(event) -> None :
 
 #################### MAIN PART ####################
 
-s = sense_hat.SenseHat()
+s = SenseHat()
 s.clear()
 g = Game()
 pygame.init()
@@ -198,7 +199,7 @@ time.sleep(1)
 for i in range(20) :
     (r1,g1,b1) = s.get_pixel(0,0)
     (r1,g1,b1) = (int(0.95*r1), int(0.95*g1), int(0.95*b1))
-    s.clear((r1,g1,b1))
+    s.clear([r1,g1,b1])
     time.sleep(0.1)
 s.clear()
 s.show_message(f"{g.Steps} steps used.")

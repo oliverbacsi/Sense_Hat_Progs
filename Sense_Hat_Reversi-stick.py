@@ -6,7 +6,8 @@
 #################### INIT PART ####################
 
 import time
-import sense_hat
+#from _sense_hat_ANSI import SenseHat
+from sense_hat import SenseHat
 
 # The original game has Black and White tiles, Black begins the game.
 # But since on the Sense Hat it's hard to display Black tiles
@@ -280,7 +281,7 @@ def moveCursor(event) -> None :
 #################### MAIN PART ####################
 
 
-s = sense_hat.SenseHat()
+s = SenseHat()
 s.clear()
 s.stick.direction_any = moveCursor
 reversi = Board()

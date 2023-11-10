@@ -8,7 +8,8 @@
 #
 
 import re, time, urllib.request
-import sense_hat
+#from _sense_hat_ANSI import SenseHat
+from sense_hat import SenseHat
 
 
 # Set this to the download interval in seconds. Default=900 (15 mins)
@@ -210,7 +211,7 @@ def getCol(_val :float, _lim1 :float, _lim2 :float, _lim3 :float, _lim4 :float) 
 
 #################### MAIN PART ####################
 
-s = sense_hat.SenseHat()
+s = SenseHat()
 s.clear()
 sw = SpWeather()
 sw.download()

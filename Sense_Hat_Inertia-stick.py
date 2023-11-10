@@ -14,7 +14,8 @@
 #################### INIT PART ####################
 
 import random, time, math
-import sense_hat
+#from _sense_hat_ANSI import SenseHat
+from sense_hat import SenseHat
 
 COLOROF :dict = {'b':[0,0,48], 'w':[65,65,65], 'g':[0,220,80], 'm':[220,0,0], 'S':[0,0,48], 's':[48,48,0], '@':[255,255,255]}
 
@@ -346,7 +347,7 @@ def fadeAway() -> None :
 #################### MAIN PART ####################
 
 
-s = sense_hat.SenseHat()
+s = SenseHat()
 s.clear()
 
 g = Game()

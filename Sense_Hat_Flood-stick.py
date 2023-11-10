@@ -4,7 +4,8 @@
 #
 
 import random,time
-import sense_hat
+#from _sense_hat_ANSI import SenseHat
+from sense_hat import SenseHat
 
 #################### INIT PART ####################
 
@@ -179,7 +180,7 @@ def moveCursor(event) -> None :
 
 #################### MAIN PART ####################
 
-s = sense_hat.SenseHat()
+s = SenseHat()
 s.clear()
 g = Game()
 s.stick.direction_any = moveCursor

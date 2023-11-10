@@ -6,9 +6,10 @@
 #################### INIT PART ####################
 
 import time
-import sense_hat
 import pygame
 import pygame.locals as pgl
+#from _sense_hat_ANSI import SenseHat
+from sense_hat import Sense_Hat
 
 # The original game has Black and White tiles, Black begins the game.
 # But since on the Sense Hat it's hard to display Black tiles
@@ -284,7 +285,7 @@ def handle_event(event) -> None :
 #################### MAIN PART ####################
 
 
-s = sense_hat.SenseHat()
+s = SenseHat()
 s.clear()
 pygame.init()
 pygame.display.set_mode((400, 400))

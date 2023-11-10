@@ -9,7 +9,7 @@
 
 ## GADGETS
 
-###Starry Night 1
+### Starry Night 1
 
 ![Screenshot-Starry1](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/scrot-Starry1.png)
 
@@ -17,24 +17,27 @@ Emulates a starry night screen.
 Background is a somewhat-flickering dark blue pattern.
 Colorful shiny stars pop up randomly and later also extinct randomly.
 
-###Starry Night 2
+### Starry Night 2
 
 ![Screenshot-Starry2](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/scrot-Starry2.png)
 
 Similar to Starry Night 1, but the colorful stars poppig up are "Supernovas", so they appear bright and then slowly fade away during their existence until they completely disappear in the background.
 
-###Fire
+### Fire
 
 Simulate a flaming fire.
 
+### Aquarium
 
-###Air Data
+Simulate an aquarium with swimming fish, seaweed, and some bubbles.
+
+### Air Data
 
 Display Temperature, Humidity and Air Pressure as different color texts and bar charts on the 8x8 LED display.
 1 column is 1 hour in the history. Values are normed to min-max. Pressure center line is latest value.
 
 
-###Space Weather
+### Space Weather
 
 Retrieve Space Weather Data from NOAA and display the status.
 The **top row** of the 8x8 LED display will be the Particle Flux status and data readiness status:
@@ -66,7 +69,7 @@ For a detailed description what the values mean please visit NOAA home page.
 
 ## GAMES
 
-###Maze
+### Maze
 
 Find Your way to the Exit of the Maze, collecting all 3 necessary keys to open the Exit door.
 
@@ -89,7 +92,7 @@ Until You don't have all the keys the radar will only show You the closest key n
 In the pygame version pressing the 'A' key will dump the full maze on the terminal as ANSI art.
 
 
-###Reversi
+### Reversi
 
 Play a Reversi game on the 8x8 LED display against the Computer.
 
@@ -106,7 +109,7 @@ Computer player is flashing the tile couple of times to make human player to see
 Computer player's algorhythm is half own idea, but also taken lot of inspiration from other Reversi games downloaded from GitHub.
 
 
-###Mastermind
+### Mastermind
 
 The classical Mastermind game on the 8x8 LED display.
 
@@ -124,7 +127,7 @@ The computer evaluates Your guess in a slow animation, then appends Your guess a
 You can switch between `View Mode` and `Enter Mode` simply by middle clicking with the stick (stick version) or pressing ENTER/SPACE key (pygame version) on **anywhere else** than the bottom-right corner, as that is a special location to ask the computer to process Your guess.
 
 
-###Flood
+### Flood
 
 Flood the screen with the same color in least possible steps.
 
@@ -138,7 +141,7 @@ When You manage to completely fill the screen with the same color, the number of
 Move the cursor with the stick (stick version) or crsr keys (pygame version) and click on the selected color with the middle button (stick version) or the ENTER/SPACE key (pygame version).
 
 
-###Inertia
+### Inertia
 
 A not so commonly known game from the sgt-puzzles set.
 
@@ -156,21 +159,26 @@ Move the cursor with the stick (stick version) or crsr keys (pygame version) and
 
 ---
 
-##TODO:
+## TODO:
 
-###Compass
+### Compass
 
 Display a proper compass utilizing the magnetometer sensor of the Sense Hat.
 
-###Unruly game
+### Unruly game
 
 Most of the procedures are already inter-coded from the C++ version of the sgt-puzzles game, but it needs to be finished yet.
 
-###Reversi game
+### Reversi game
 
 Experienced a bug: Close to the end of the game most of the game field was already blue (human player), so blue player didn't have a chance to put a tile (the blue question mark appeared correctly), while the red player (computer) had one single possibility to put the tile. But somehow the computer player didn't perform the move, but a red question mark appeared as if the computer player also didn't have the chance the move. Surprisingly the game was not over, so when the program was evaluating the "Game Over" condition, then it saw the possibility for the computer player to move, but when it was the computer player's turn, the algorhythm didn't find the correct move.... Strange...
 
-###SpaceWeather
+### SpaceWeather
 
 May be the daily geomagnetic data should be retrieved from a different file rather than the daily summary report.
 As well as the particle flux should be retrieved completely from the indices file. Although this will require to set up new tresholds.
+
+### _sense_hat_ANSI
+
+This is a very lame library to subst the real sense_hat library,
+when no Raspberry is around and developing only on PC.

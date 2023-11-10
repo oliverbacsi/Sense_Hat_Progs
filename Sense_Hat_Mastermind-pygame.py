@@ -6,9 +6,10 @@
 #################### INIT PART ####################
 
 import random, time, math
-import sense_hat
 import pygame
 import pygame.locals as pgl
+#from _sense_hat_ANSI import SenseHat
+from sense_hat import SenseHat
 
 # Peg colors the game is allowed to use (6 colors by default) are under '_'
 COLOR :dict = {'R':(240,0,00), 'Y':(200,200,0), 'G':(00,240,0),  'C':(0,200,200), 'B':(0,0,240), 'M':(200,0,200),
@@ -241,7 +242,7 @@ def flash(what :str ="scr", colorList :list =[255,255,255]) -> None :
 
 #################### MAIN PART ####################
 
-s = sense_hat.SenseHat()
+s = SenseHat()
 s.clear()
 pygame.init()
 pygame.display.set_mode((400, 400))

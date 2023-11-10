@@ -2,8 +2,9 @@
 ########################################################x
 # Air Data Displaying Program
 
-import sense_hat
-s=sense_hat.SenseHat()
+# from _sense_hat_ANSI import SenseHat
+from sense_hat import SenseHat
+s=SenseHat()
 from time import sleep
 
 while True :

@@ -4,7 +4,8 @@
 #
 
 import random, time
-import sense_hat
+#from _sense_hat_ANSI import SenseHat
+from sense_hat import SenseHat
 
 # NUMBER OF FIRE CORES IN EACH STEP
 Core :int =2
@@ -18,7 +19,7 @@ Fade :float =0.175
 
 # Initialize
 b = [0]*73
-s = sense_hat.SenseHat()
+s = SenseHat()
 s.clear ()
 V = s.get_pixels()
 
