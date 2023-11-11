@@ -30,7 +30,11 @@ class Fish :
     def __init__(self) :
         """Store the variables and methods of a Fish"""
         # Color triplet on the screen
-        self.Color :list = list((r(128,255), r(128,255), r(128,255)))
+        # First idea was to randomize R,G,B , but this has lead to rather grey-ish colors
+        #  (high saturation, less rainbow-like fish)
+        # So now the idea is to generate colors on the H-S-V space
+        Hue :float = 0.01*r(0,628)
+        self.Color :list = list((int(80+60*math.sin(Hue)), int(80+60*math.sin(Hue+2.0944)), int(80+60*math.sin(Hue+4.1888))))
         # Size is 1x1 or 2x1
         self.Size  :int  = r(1,2)
         # Slowness means how many ticks to wait until move. Large fish swims slower.
@@ -108,7 +112,7 @@ class SeaWeed :
 
         RealX :int
         for j in range(self.Height) :
-            RealX = int( self.XPos + 0.6*math.sin(self.CurrPhase + 1.5*j) )
+            RealX = int( self.XPos + 0.55*math.sin(self.CurrPhase + 1.5*j) )
             V[(6-j)*8+RealX] = self.Color
 
 
@@ -123,7 +127,7 @@ class Bubble :
         # Make sure the bubbles are spread and also don't come immediately
         self.YPos :int = r(8,16)
         # Randomize the color a little
-        self.Color :list = list((0,0,r(120,180)))
+        self.Color :list = list((0,0,r(160,220)))
 
     def handleTick(self) -> None :
         """Handle the event if received a Tick"""

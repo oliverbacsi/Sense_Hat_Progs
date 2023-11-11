@@ -33,9 +33,11 @@ class SpWeather :
         self.P3 :float =0.0
         # Electron flux > 2MeV
         self.E1 :float =0.0
-        # X-Ray background letter
+        # X-Ray letter
         self.XL :str ='B'
-        # X-Ray background value
+        # X-Ray scale
+        self.XS :float =0.0
+        # X-Ray value
         self.XV :float =0.0
         # Kp indices
         self.Kp :list =[0.0]*8
@@ -80,46 +82,14 @@ class SpWeather :
         # Consider data as valid, but at the first fail invalidate it.
         self.DataValid = True
         Valid :dict = {'X':False, 'P':False, 'E':False, 'K':False}
+        fh = open("_SpaceWeather-essential-data-lines-out.txt","w")
 
-        # Try the "sgas.txt" first and get all the data except P3
-        PageContents1 = urllib.request.urlopen("https://services.swpc.noaa.gov/text/sgas.txt").read()
-        PageData1 = str(PageContents1).split("\\n")
-        for DataLine in PageData1 :
-            mXray = re.match(".*X-ray.Background.([A-Z])([0-9]\.[0-9]).*",DataLine)
-            mProt = re.match(".*GT.1.MeV.([0-9.e+\-]+).*GT.10.MeV.([0-9.e+\-]+).*",DataLine)
-            mElec = re.match(".*GT.2.MeV.([0-9.e+\-]+).*",DataLine)
-            mKp   = re.match(".*Boulder.*Planetary.(.*)",DataLine)
-
-            if mXray :
-                self.XL = mXray[1].upper()
-                self.XV = float(mXray[2])
-                Valid['X'] =True
-            elif mProt :
-                self.P1 = float(mProt[1])
-                self.P2 = float(mProt[2])
-                Valid['P'] =True
-            elif mElec :
-                self.E1 = float(mElec[1])
-                Valid['E'] =True
-            elif mKp :
-                KpList = str(mKp[1]).strip().split(" ")
-                if len(KpList) > 7 : Valid['K'] =True
-                self.Kp = [0.0]*8
-                _idx =7
-                while len(KpList) and _idx > -1 :
-                    self.Kp[_idx] = float(KpList.pop())
-                    _idx -= 1
-
-        for _idx in ['X','P','E','K'] :
-            if not Valid[_idx] : self.DataValid = False
-
-        # Now try the current space weather indices for the third proton data.
-        # Dunno why this is not contained by the sgas though....
+        # Load the particle flux from the current space weather indices report:
         PageContents2 = urllib.request.urlopen("https://services.swpc.noaa.gov/text/current-space-weather-indices.txt").read()
         PageData2 = str(PageContents2).split("\\n")
         # The data is in the first uncommented line after the phrase "Proton flux"
         ReadNextUncommented :bool =False
-        Valid['P'] =False
+        Valid['P'] =False  ; Valid['E'] =False
         for DataLine in PageData2 :
             if re.match("^#.*",DataLine) :
                 # Commented line
@@ -127,13 +97,60 @@ class SpWeather :
             else :
                 # Uncommented line
                 if ReadNextUncommented :
-                    mProt = re.match("^\s+[0-9.e+\-]+\s+[0-9.e+\-]+\s+([0-9.e+\-]+)\s+.*",DataLine)
-                    if mProt :
-                        self.P3 = float(mProt[1])
+                    mPart = re.match("^\s+([0-9.e+\-]+)\s+([0-9.e+\-]+)\s+([0-9.e+\-]+)\s+([0-9.e+\-]+)\s+([0-9.e+\-]+)\s+.*",DataLine)
+                    if mPart :
+                        fh.write("Particle Flux:\n"+str(mPart[0])+"\n\n")
+                        self.P1 = float(mPart[1])
+                        self.P2 = float(mPart[2])
+                        self.P3 = float(mPart[3])
                         Valid['P'] = True
+                        self.E1 = float(mPart[4])
+                        Valid['E'] = True
+                        self.XV = float(mPart[5])
                         break
 
-        if not Valid['P'] : self.DataValid = False
+        # Load the geomagnetic data from the daily geomagnetic indices report:
+        Valid['K'] =False
+        PageContents1 = urllib.request.urlopen("https://services.swpc.noaa.gov/text/daily-geomagnetic-indices.txt").read()
+        PageData1 = str(PageContents1).split("\\n")
+        # The data is in the last 2 rows with data, omitting the "-1" values
+        LastRow :str =""
+        PrevRow :str =""
+        for DataLine in PageData1 :
+            if len(DataLine.strip()) > 10 :
+                PrevRow = LastRow
+                LastRow = DataLine
+        DataLine = PrevRow[65:] + " " + LastRow[65:]
+        DataList = DataLine.split()
+        fh.write(f"Kp indices:\n{PrevRow}\n{LastRow}\n\n")
+        i :int =5
+        while i > -1 and len(DataList) :
+            self.Kp[i] = float(DataList.pop())
+            if self.Kp[i] >= 0.0 : i -= 1
+        if i < 0 : Valid['K'] =True
+        
+        # Load the X-Ray events from the solar geophysical events report:
+        Valid['X'] =False
+        PageContents3 = urllib.request.urlopen("https://services.swpc.noaa.gov/text/solar-geophysical-event-reports.txt").read()
+        PageData3 = str(PageContents3).split("\\n")
+        # The data is in the last valid data row with an X-Ray report
+        ReportLine :str =""
+        for DataLine in PageData3 :
+            if len(DataLine) > 62 :
+                if DataLine[43:46].upper() == "XRA" :
+                    ReportLine = DataLine
+                    self.XL = DataLine[58].upper()
+                    self.XS = float(DataLine[59:62])
+                    Valid['X'] =True
+        # If did not manage to get X-Ray event, then it's the background X-Ray, and level is the multiplicant of 1e-06
+        if not Valid['X'] :
+            self.XL = 'B'
+            self.XS = self.XV * 1000000.0
+        fh.write(f"X-Ray event:\n{ReportLine}\n\n")
+
+        # If anything is not valid, then let's not consider it as valid
+        for _idx in ['X','P','E','K'] :
+            if not Valid[_idx] : self.DataValid = False
 
         # If we managed to load all data, the new update can be set.
         # TODO : This means that the last update time will mean
@@ -143,7 +160,7 @@ class SpWeather :
         #        data date inside the file and consider the
         #        age of the data accordingly!
         if self.DataValid : self.LastUpdate = time.time()
-
+        fh.close()
 
 
     def redraw(self) -> None :

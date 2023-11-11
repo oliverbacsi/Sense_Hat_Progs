@@ -1,0 +1,73 @@
+:Product: 20231111events.txt
+:Created: 2023 Nov 11 2237 UT
+:Date: 2023 11 11
+# Prepared by the U.S. Dept. of Commerce, NOAA, Space Weather Prediction Center
+# Please send comments and suggestions to SWPC.Webmaster@noaa.gov 
+#
+# Missing data: ////
+# Updated every 5 minutes.
+#                            Edited Events for 2023 Nov 11
+#
+#Event    Begin    Max       End  Obs  Q  Type  Loc/Frq   Particulars       Reg#
+#-------------------------------------------------------------------------------
+
+9700 +     0020   0024      0028  G16  5   XRA  1-8A      C2.2    9.2E-04   3483
+
+9710 +     0252   0302      0312  G16  5   XRA  1-8A      C2.0    2.2E-03   3477
+
+9720 +     0327   0332      0336  G16  5   XRA  1-8A      C2.4    8.9E-04   3477
+
+9730 +     0351   0359      0403  G16  5   XRA  1-8A      C7.1    8.6E-04   3483
+9730       0359   0359      0403  LEA  3   FLA  N10W35    SF                3483
+
+9740 +     0559   0608      0614  G16  5   XRA  1-8A      C3.6    2.0E-03   3483
+
+9750       0616   0625      0631  SVI  3   FLA  N08W40    SF                3483
+
+9760       0644   0644      0644  LEA  G   RBR  245       190                   
+
+9770       0646   0651      0654  SVI  3   FLA  N09W41    SF                3483
+
+9780       0703   0704      0708  SVI  3   FLA  N08W44    SF                3483
+9780       0703   0703      0703  SVI  G   RBR  245       130               3483
+
+9790       0728   0735      0751  SVI  3   FLA  N08W39    SF                3483
+9790 +     0729   0738      0742  G16  5   XRA  1-8A      C2.5    1.2E-03   3483
+
+9800 +     0750   0750      0750  SVI  G   RBR  245       110                   
+
+9810       0758   0804      0806  SVI  3   FLA  N08W43    SF                3483
+
+9820 +     0826   0834      0844  G16  5   XRA  1-8A      C3.8    3.0E-03   3477
+
+9830       0826   ////      0927  SVI  C   RSP  128-180   CTM/1                 
+
+9820      B0828  U0839     A0923  SVI  3   FLA  S17W41    SF                3477
+
+9880       0829   0831      0853  LEA  3   FLA  S15W54    SF                3477
+
+9830 +     0910   0916      0920  G16  5   XRA  1-8A      C6.5    1.7E-03   3483
+
+9840       1021   1021      1021  SVI  G   RBR  245       110                   
+
+9850       1109   1109      1109  SVI  G   RBR  245       100                   
+
+9870       1114   1114      1114  SVI  G   RNS  245       150                   
+
+9860 +     1224   1236      1253  G16  5   XRA  1-8A      C2.8    3.3E-03   3477
+
+9890       1431   1431      1431  SVI  G   RBR  245       130                   
+
+9900 +     1604   1610      1626  G16  5   XRA  1-8A      C1.5    4.9E-04   3477
+
+9910 +     1636   1647      1700  G16  5   XRA  1-8A      C1.8    8.6E-04   3477
+9910       1644   1644      1648  HOL  3   FLA  S19W56    SF      DSD       3477
+
+9920 +     1701   1729      1745  G16  5   XRA  1-8A      M1.2    2.0E-02   3477
+9920       1708   1735      1754  HOL  3   FLA  S18W58    SF                3477
+
+9930       1804   1804      1813  HOL  3   FLA  N09W49    SF                3483
+
+9940 +     1819   1830      1838  G16  5   XRA  1-8A      C7.9    6.6E-03   3483
+
+9950 +     2004   2016      2034  G16  5   XRA  1-8A      C2.4    3.7E-03   3477

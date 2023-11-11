@@ -175,8 +175,7 @@ Experienced a bug: Close to the end of the game most of the game field was alrea
 
 ### SpaceWeather
 
-May be the daily geomagnetic data should be retrieved from a different file rather than the daily summary report.
-As well as the particle flux should be retrieved completely from the indices file. Although this will require to set up new tresholds.
+Time stamp of the last successful data should not be the timestamp of the download itself but of the (oldest?) report timestamp in the data files.
 
 ### _sense_hat_ANSI
 
