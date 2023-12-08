@@ -2,8 +2,13 @@
 ##################################################
 # Aquarium
 
-from sense_hat import SenseHat
-#from _sense_hat_ANSI import SenseHat
+try :
+    from sense_hat import SenseHat
+except :
+    try :
+        from sense_emu import SenseHat
+    except :
+        from _sense_hat_ANSI import SenseHat
 
 from random import randint as r
 from time import sleep

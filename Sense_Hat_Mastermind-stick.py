@@ -6,8 +6,13 @@
 #################### INIT PART ####################
 
 import random, time, math
-#from _sense_hat_ANSI import SenseHat
-from sense_hat import SenseHat
+try :
+    from sense_hat import SenseHat
+except :
+    try :
+        from sense_emu import SenseHat
+    except :
+        from _sense_hat_ANSI import SenseHat
 
 # Peg colors the game is allowed to use (6 colors by default) are under '_'
 COLOR :dict = {'R':(240,0,00), 'Y':(200,200,0), 'G':(00,240,0),  'C':(0,200,200), 'B':(0,0,240), 'M':(200,0,200),

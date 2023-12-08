@@ -14,8 +14,13 @@
 #################### INIT PART ####################
 
 import random, time, math
-#from _sense_hat_ANSI import SenseHat
-from sense_hat import SenseHat
+try :
+    from sense_hat import SenseHat
+except :
+    try :
+        from sense_emu import SenseHat
+    except :
+        from _sense_hat_ANSI import SenseHat
 
 COLOROF :dict = {'b':[0,0,48], 'w':[65,65,65], 'g':[0,220,80], 'm':[220,0,0], 'S':[0,0,48], 's':[48,48,0], '@':[255,255,255]}
 

@@ -6,8 +6,13 @@
 #################### INIT PART ####################
 
 import time
-#from _sense_hat_ANSI import SenseHat
-from sense_hat import SenseHat
+try :
+    from sense_hat import SenseHat
+except :
+    try :
+        from sense_emu import SenseHat
+    except :
+        from _sense_hat_ANSI import SenseHat
 
 # The original game has Black and White tiles, Black begins the game.
 # But since on the Sense Hat it's hard to display Black tiles

@@ -3,7 +3,13 @@
 # Air Data Displaying Program
 
 # from _sense_hat_ANSI import SenseHat
-from sense_hat import SenseHat
+try :
+    from sense_hat import SenseHat
+except :
+    try :
+        from sense_emu import SenseHat
+    except :
+        from _sense_hat_ANSI import SenseHat
 s=SenseHat()
 from time import sleep
 

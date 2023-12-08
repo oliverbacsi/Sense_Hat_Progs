@@ -4,7 +4,13 @@
 #
 
 import random, sys, time, math
-import sense_hat
+try :
+    from sense_hat import SenseHat
+except :
+    try :
+        from sense_emu import SenseHat
+    except :
+        from _sense_hat_ANSI import SenseHat
 
 TABLE    :dict = {}
 SOLUTION :list = list(())
@@ -411,7 +417,7 @@ recurGenWalls(0,0,WID-1,HEI-1)
 p = Player(g.StartCell[0],g.StartCell[1])
 p.Route.append(g.StartObj)
 
-s = sense_hat.SenseHat()
+s = SenseHat()
 s.clear()
 g.V = s.get_pixels()
 g.redrawScreen()

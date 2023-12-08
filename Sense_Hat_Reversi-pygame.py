@@ -8,8 +8,13 @@
 import time
 import pygame
 import pygame.locals as pgl
-#from _sense_hat_ANSI import SenseHat
-from sense_hat import Sense_Hat
+try :
+    from sense_hat import SenseHat
+except :
+    try :
+        from sense_emu import SenseHat
+    except :
+        from _sense_hat_ANSI import SenseHat
 
 # The original game has Black and White tiles, Black begins the game.
 # But since on the Sense Hat it's hard to display Black tiles

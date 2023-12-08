@@ -2,9 +2,15 @@
 # saved as "/home/oliver/plumb_line-2023-10-13-17-46-36.py"
 
 from time import sleep
-from sense_hat import SenseHat
 from PIL import Image, ImageDraw
 import math
+try :
+    from sense_hat import SenseHat
+except :
+    try :
+        from sense_emu import SenseHat
+    except :
+        from _sense_hat_ANSI import SenseHat
 
 hat = SenseHat()
 

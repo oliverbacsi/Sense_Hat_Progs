@@ -6,7 +6,13 @@
 #################### INIT PART ####################
 
 import random, time
-import sense_hat
+try :
+    from sense_hat import SenseHat
+except :
+    try :
+        from sense_emu import SenseHat
+    except :
+        from _sense_hat_ANSI import SenseHat
 
 #################### CLASS PART ####################
 

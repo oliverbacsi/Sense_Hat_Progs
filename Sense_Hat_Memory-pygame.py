@@ -6,8 +6,13 @@
 import random,time
 import pygame
 import pygame.locals as pgl
-#from _sense_hat_ANSI import SenseHat
-from sense_hat import SenseHat
+try :
+    from sense_hat import SenseHat
+except :
+    try :
+        from sense_emu import SenseHat
+    except :
+        from _sense_hat_ANSI import SenseHat
 
 #################### INIT PART ####################
 
@@ -128,7 +133,7 @@ class Game :
             col = AllCols.pop()
             for j in range(2) :
                 coo = random.choice(AllCoords)
-                AllCoords.pop(coo)
+                AllCoords.pop(AllCoords.index(coo))
                 self.Board.append(Cell(coo%4,coo//4,col,pat))
 
     def redraw(self) -> None :
@@ -154,7 +159,7 @@ class Game :
 
     def cellClicked(self) -> None :
         """Manage the event that player clicked on the field"""
-        self.Board[4*self.Y+self.X].address()
+        self.Board[4*self.CurY+self.CurX].address()
 
 
 #################### PROC PART ####################
