@@ -4,8 +4,6 @@
 #
 
 import random,time,math
-import pygame
-import pygame.locals as pgl
 try :
     from sense_hat import SenseHat
 except :
@@ -172,16 +170,14 @@ def clamp(Value :int) -> int :
     return max(min(Value,3),0)
 
 def handle_event(event) -> None :
-    """Handle pygame key hit events"""
-    if event.type != pgl.KEYDOWN : return
-    if event.key in [pgl.K_SPACE, pgl.K_RETURN] :
+    """Handle the stick events"""
+    if event.action != "pressed" : return
+    if event.direction == "middle" :
         g.cellClicked()
     else :
-        ek = str(event.key)
-        if ek not in ["273", "274", "275", "276"] : return
         g.CurE = False
         g.Board[4*g.CurY+g.CurX].draw()
-        dt = {"273":(0,-1) , "274":(0,1) , "276":(-1,0) , "275":(1,0)}[ek]
+        dt = {"up":(0,-1) , "down":(0,1) , "left":(-1,0) , "right":(1,0)}[event.direction]
         g.CurX = clamp(g.CurX+dt[0]) ; g.CurY = clamp(g.CurY+dt[1])
         g.CurE = True
 
@@ -203,12 +199,10 @@ def fadeAway() -> None :
 s = SenseHat()
 s.clear()
 g = Game()
-pygame.init()
-pygame.display.set_mode((400, 400))
+s.stick.direction_any = handle_event
 
 # Main game loop (watching for events and blink the cursor)
 while not g.GameOver :
-    for event in pygame.event.get(): handle_event(event)
     g.curChange()
     time.sleep(0.5)
 
@@ -217,5 +211,4 @@ g.redraw()
 time.sleep(3)
 fadeAway()
 s.show_message(f"{g.Steps} steps used.")
-pygame.quit()
 
