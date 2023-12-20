@@ -11,7 +11,7 @@
 
 ### Starry Night 1
 
-![Screenshot-Starry1](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/scrot-Starry1.png)
+![Screenshot-Starry1](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/_screenshots/scrot-Starry1.jpg)
 
 Emulates a starry night screen.
 Background is a somewhat-flickering dark blue pattern.
@@ -19,25 +19,33 @@ Colorful shiny stars pop up randomly and later also extinct randomly.
 
 ### Starry Night 2
 
-![Screenshot-Starry2](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/scrot-Starry2.png)
+![Screenshot-Starry2](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/_screenshots/scrot-Starry2.jpg)
 
 Similar to Starry Night 1, but the colorful stars poppig up are "Supernovas", so they appear bright and then slowly fade away during their existence until they completely disappear in the background.
 
 ### Fire
 
+![Screenshot-Fire](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/_screenshots/scrot-Fire.jpg)
+
 Simulate a flaming fire.
 
 ### Aquarium
 
+![Screenshot-Aquarium](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/_screenshots/scrot-Aquarium.jpg)
+
 Simulate an aquarium with swimming fish, seaweed, and some bubbles.
 
 ### Air Data
+
+![Screenshot-AirData](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/_screenshots/scrot-AirData.jpg)
 
 Display Temperature, Humidity and Air Pressure as different color texts and bar charts on the 8x8 LED display.
 1 column is 1 hour in the history. Values are normed to min-max. Pressure center line is latest value.
 
 
 ### Space Weather
+
+![Screenshot-SpaceWeather](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/_screenshots/scrot-SpaceWeather.jpg)
 
 Retrieve Space Weather Data from NOAA and display the status.
 The **top row** of the 8x8 LED display will be the Particle Flux status and data readiness status:
@@ -73,7 +81,7 @@ For a detailed description what the values mean please visit NOAA home page.
 
 Find Your way to the Exit of the Maze, collecting all 3 necessary keys to open the Exit door.
 
-![Screenshot-Maze](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/scrot-Maze.png)
+![Screenshot-Maze](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/_screenshots/scrot-Maze.jpg)
 
 **Game Rules**:
 
@@ -96,7 +104,7 @@ In the pygame version pressing the 'A' key will dump the full maze on the termin
 
 Play a Reversi game on the 8x8 LED display against the Computer.
 
-![Screenshot-Reversi](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/scrot-Reversi.png)
+![Screenshot-Reversi](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/_screenshots/scrot-Reversi.jpg)
 
 For a better visibility on the 8x8 LED display the two players' colors are not black and white but blue and red. _(Black would mean an LED turned off, so the whole playfield should be colored to some neutral gray color, which might sound a generally good idea but imagine the situation if the top 3 rows of the board contain only black tiles then the top part of the screen is completely turned off, looking very stupid)_
 Blue is the human player who begins the game, red is the computer player. Human and computer players put their tiles one by one in turns. You have to put a tile onto such a location where you can capture a whole and complete row of opponent's tiles between one of Your existing tiles and the currently put tile. This case the whole row turns into Your color. The row of tiles is considered in any of the 8 directions: up/down/left/right and in the 4 diagonal directions.
@@ -113,7 +121,7 @@ Computer player's algorhythm is half own idea, but also taken lot of inspiration
 
 The classical Mastermind game on the 8x8 LED display.
 
-![Screenshot-Mastermind](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/scrot-Mastermind.png)
+![Screenshot-Mastermind](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/_screenshots/scrot-Mastermind.jpg)
 
 The computer will randomly pick a color out of 6 possible colors (red, yellow, green, cyan, blue, magenta) into each of 4 locations, creating a set of 4 colors (repetition possible). Your goal is to guess the 4 colors correctly, in correct sequence. The goal of the game is to guess the correct color code in the less possible turns.
 The computer will give You a hint after each guessing: how many of the guessed colors are a perfect match (correct color on correct location), and how many colors are right (there is such a color within the set of 4, but You guessed it on an incorrect location).
@@ -131,7 +139,7 @@ You can switch between `View Mode` and `Enter Mode` simply by middle clicking wi
 
 Flood the screen with the same color in least possible steps.
 
-![Screenshot-Flood](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/scrot-Flood.png)
+![Screenshot-Flood](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/_screenshots/scrot-Flood.jpg)
 
 Initially You get a screen filled with mixed color pixels and areas. The cursor is blinking in the top-left corner.
 You can move freely on the screen with the cursor, and whatever color You click on, it will be copied to the top-left corner pixel and flooded to all sideways-adjacent (4 directions) pixels on the screen with the same color as the top-left one. This means that You should check which color has the most pixels in adjacent contact with the already filled area of the top-left corner and click on this color, to fill the existing area with this new color, therefore causing the already filled area to grow with the most number of pixels.
@@ -145,7 +153,7 @@ Move the cursor with the stick (stick version) or crsr keys (pygame version) and
 
 A not so commonly known game from the sgt-puzzles set.
 
-![Screenshot-Inertia](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/scrot-Inertia.png)
+![Screenshot-Inertia](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/_screenshots/scrot-Inertia.jpg)
 
 There is a playfield filled with Gems to collect (bright green), Mines to make You die if You step on them (bright red), Walls that will block Your movement to that direction (dark grey), Stoppers or Catchers if You like, that will absorb Your inertia and halt Your actual motion (dark yellow), and the rest is normal playfield with no specific function (dark blue).
 The goal is to navigate the player through the playfield and to collect all Gems without stepping on any of the Mines. Stepping on a Mine is instant death therefore losing the game.
