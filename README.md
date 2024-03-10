@@ -29,6 +29,12 @@ Similar to Starry Night 1, but the colorful stars poppig up are "Supernovas", so
 
 Simulate a flaming fire.
 
+### Paint Drips
+
+![Screenshot-PaintDrips](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/_screenshots/scrot-PaintDrips.jpg)
+
+Colorful paint is dripping on Your screen, spreading, mixing with the other color drips and fading away.
+
 ### Aquarium
 
 ![Screenshot-Aquarium](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/_screenshots/scrot-Aquarium.jpg)
