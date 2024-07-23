@@ -29,11 +29,13 @@ Similar to Starry Night 1, but the colorful stars poppig up are "Supernovas", so
 
 Simulate a flaming fire.
 
-### Paint Drips
+### Paint Drips and Paint Drips 2
 
 ![Screenshot-PaintDrips](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/_screenshots/scrot-PaintDrips.jpg)
 
 Colorful paint is dripping on Your screen, spreading, mixing with the other color drips and fading away.
+- Paint Drips 1 uses a "traditional" linear programming, managing and handling all pixels separately by the code.
+- Paint Drips 2 treats the 2x2 screen elements as objects that can interfere with its neighbouring objects: it can send paint splashes to the neighbours when receiving a drip, as well as receive paint splashes from the neighbours and get the adjacent LEDs tinted to a certain extent with the neighbouring color.
 
 ### Aquarium
 
