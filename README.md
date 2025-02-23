@@ -217,6 +217,43 @@ _Note:_ Using 2x2 pixel shapes only leaves a 4x4 playfield (8 item pairs) that i
 While using 1x1 pixel items for the game would mean a 8x8 playfield (32 item pairs), although we would lose the shapes, and the only thing to memorize would be _the color_ of the pixel, although generating 32 different colors would also mean that the difference between the colors would be quite minor, creating some confusion when trying to find the matching pairs, so the game would turn unenjoyable.
 
 
+### 2048
+
+> SenseHat adaptation of the binary geek's 2048 matching game
+
+
+![Screenshot-2048](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/_screenshots/scrot-2048.jpg)
+
+The playfield consists of 4x4 cells (represented by 2x2 LEDs on the SenseHat). Each cell might be empty or contain a number that is a power of 2. In each turn the player has one move to make in any of the four cardinal directions, and all the numbers of the whole playfield get pushed towards that direction until they hit the wall or each other, so they pile up on that wall the player has selected. If two cells with the **same value** hit each other, they are merged into one cell with the value summed up, so `4` + `4` become merged into a single `8`. Therefore the numbers will always remain a certain power of 2. After each move of the player a single `2` number is dropped randomly on one of the empty cells of the playfield.
+The aim of the player is to merge so many cells that the value eventually reaches `2048` _(thus the name of the game)_. To reach this high number a lot of different powers of 2 are required to be present on the playfield simultaneously, turning the playfield quite crowdy, blocking the way of further moves, therefore to reach 2048 might be quite challenging.
+
+* If 2048 appears at any location of the playfield, the game is won with no further conditions.
+* If the whole playfield gets populated, there are no more empty cells, OR the player pushes `x` or `q` in pygame version or the `stick middle` in stick version, the game is lost/quit, the number of performed turns and the total earned score is displayed on the SenseHat.
+	* If the playfield gets full **after** the program drops the last `2`, the game is **not over**, as the player still has the chance to move and merge the numbers, freeing up some cells, where the program can drop further `2`'s.
+	* The game **is over** if there are no free cells after the player's move, therefore there is **nowhere** to drop the next `2`.
+
+These are the rules for the standard 2048 game that is being played on a PC display where the program is able to indicate the actual values of the cells. On the SenseHat there are 2x2 pixels available for each cell, so a different method had to be applied.
+The 2x2 pixels show a certain color for each value, although not randomly, but following the hue sequence of the H-S-V color space (the color of the rainbow), to give a hint which value is higher than the other. Red - Orange - Yellow - Green - Cyan - etc... This seems complex but You can get used to it quite easily, and because of using vivid colors, the SenseHat turns into an eyecandy.
+A further aid in determining the value of a cell a hint is given: the four LEDs of a cell represent four bits, the lighter ones mean `1`, the darker ones mean `0`, and these give You a number, that shows which power of 2 the cell represents. The top 2 pixels are 8 and 4 , the bottom 2 pixels are 2 and 1. So for example if the 4 pixels of a cell are: top row: dark - light ; bottom row: light - dark, then this means 0-1-1-0, that is the binary representation of 6, so the cell value is 2^6, that is 64. Although as I said, You'll never start calculating the numbers as the colors are so obvious that You'll focus on merging two oranges into a yellow...
+
+**Hint for values:**
+
+|Power of 2| Value | Color |Bit pattern|
+|----------|-------|-------|-----------|
+|          |_empty_|  black| _N/A_     |
+|        1 |     2 |   gray|   0-0-0-1 |
+|        2 |     4 |    red|   0-0-1-0 |
+|        3 |     8 | orange|   0-0-1-1 |
+|        4 |    16 | yellow|   0-1-0-0 |
+|        5 |    32 |  green|   0-1-0-1 |
+|        6 |    64 |   cyan|   0-1-1-0 |
+|        7 |   128 |   blue|   0-1-1-1 |
+|        8 |   256 | purple|   1-0-0-0 |
+|        9 |   512 |   pink|   1-0-0-1 |
+|       10 |  1024 | l.gray|   1-0-1-0 |
+|       11 |  2048 |  white|   1-0-1-1 |
+
+
 ---
 
 ## TODO:
@@ -236,6 +273,14 @@ Experienced a bug: Close to the end of the game most of the game field was alrea
 ### SpaceWeather
 
 Time stamp of the last successful data should not be the timestamp of the download itself but of the (oldest?) report timestamp in the data files.
+
+### Four-in-a-row game
+
+Develop game engine and finish the game
+
+### Zuma
+
+Develop game engine and finish the game
 
 ### _sense_hat_ANSI
 
