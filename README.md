@@ -1,9 +1,9 @@
 # Raspberry Pi Sense Hat Progs
 
-> Games and Tools for Raspberry Pi Sense Hat
-> You need a Raspberry PI Single Board Computer equipped with a "Sense Hat" Board to run these programs.
-> Worst case You can also use the Sense Hat Emulator...
-> Some of the games are just a python re-written version of the famous sgt-puzzles collection _(find on GitHub)_, using the original C++ source code and applying some simplifications, some are completely own code development from scratch, and for some games I have taken inspiration from already existing codes publicly available on GitHub, although the Python realization and the coding for SenseHat is still own work.
+> Games and Tools for Raspberry Pi Sense Hat.  
+> You need a Raspberry PI Single Board Computer equipped with a "Sense Hat" Board to run these programs.  
+> Worst case You can also use the Sense Hat Emulator...  
+> Some of the games are just a python re-written version of the famous sgt-puzzles collection _(find on GitHub)_, using the original C++ source code and applying some simplifications, some are completely own code development from scratch, and for some games I have taken inspiration from already existing codes publicly available on GitHub, although the Python realization and the coding for SenseHat is still own work.  
 
 ---
 
@@ -35,13 +35,13 @@ Simulate a flaming fire.
 
 Colorful paint is dripping on Your screen, spreading, mixing with the other color drips and fading away.
 - Paint Drips 1 uses a "traditional" linear programming, managing and handling all pixels separately by the code.
-- Paint Drips 2 treats the 2x2 screen elements as objects that can interfere with its neighbouring objects: it can send paint splashes to the neighbours when receiving a drip, as well as receive paint splashes from the neighbours and get the adjacent LEDs tinted to a certain extent with the neighbouring color.
+- Paint Drips 2 treats the 2x2 screen elements as objects that can interfere with their neighbouring objects: They can send paint splashes to the neighbours when receiving a drip, as well as receive paint splashes from the neighbours and get the adjacent LEDs tinted to a certain extent with the neighbouring color.
 
 ### Aquarium
 
 ![Screenshot-Aquarium](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/_screenshots/scrot-Aquarium.jpg)
 
-Simulate an aquarium with swimming fish, seaweed, and some bubbles.
+Simulate an aquarium with swimming fish, seaweed, and some bubbles. Inspiration taken from asciiaquarium terminal gadget.
 
 ### Air Data
 
@@ -96,15 +96,15 @@ For a detailed description what the values mean please visit NOAA home page.
 
 Use the joystick (stick version) or the cursor keys (pygame version) to navigate inside the labyrinth.
 Unvisited rooms appear with blue walls while visited ones appear in green.
-The walls of corridors belonging to the shortest route from the start to Your current position will show up brown to help You find Your way back from where You came from.
+The walls of corridors belonging to the shortest route from the start to Your current position will show up brown to help You find Your way back from where You came from. (Ariadne's thread)
 
 The 3 keys to collect will appear shiny bright green, yellow and red in the maze and their rooms' walls are also enlighted by the same color light.
 In the top row (which is the status row) You will see which keys You already have: Dark color keys mean You still need to find these. Bright color means You already have the respective key.
 The exit cell will show up light magenta, enlightening the whole room with magenta around it.
 
 The right edge of the screen is some kind of "Item Radar" showing which item is the closest and how far is it measured directly (not following the route) -- giving You a hint which direction the closest feature is.
-The color of the bar is the color of the item that is closest, and the length and brightness of the bar hints the distance. (first the bar is dark, going from 0-8, then a bright bar is overlapping it going 0-8)
-Until You don't have all the keys the radar will only show You the closest key not taking care about the exit as You can not exit any way without all 3 keys. When You get all 3 keys the radar will only mind about the exit as having all 3 keys enables You to exit.
+The color of the bar is the color of the item that is closest, and the length and brightness of the bar hints the distance. (first the bar is dark, going from 0-8, then a bright bar is overlapping it going 0-8).  
+Until You don't have all the keys, the radar will only show You the closest key, not taking care about the exit, as You can not exit any way without all 3 keys. When You get all 3 keys the radar will only mind about the exit as having all 3 keys enables You to exit.
 
 In the pygame version pressing the 'A' key will dump the full maze on the terminal as ANSI art.
 
@@ -139,7 +139,7 @@ Computer player's algorhythm is half own idea, but also taken lot of inspiration
 
 ![Screenshot-Mastermind](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/_screenshots/scrot-Mastermind.jpg)
 
-The computer will randomly pick a color out of 6 possible colors (red, yellow, green, cyan, blue, magenta) into each of 4 locations, creating a set of 4 colors (repetition possible). Your goal is to guess the 4 colors correctly, in correct sequence. Try to guess the correct color code in the less possible turns.
+The computer will randomly pick a color out of 6 possible colors (red, yellow, green, cyan, blue, magenta) into each of 4 locations, creating a set of 4 colors (repetition possible). Your goal is to guess the 4 colors correctly, in correct sequence. Try to guess the correct color code with least possible turns.
 
 The computer will give You a hint after each guessing: how many of the guessed colors are a perfect match (correct color on correct location), and how many colors are right (there is such a color within the set of 4, but You guessed it on an incorrect location).
 Your guesses will appear on the left half of the screen, the computer's answers on the right half, side by side, for each guess. The guess list is scrollable up and down so that You can view all of Your previous guesses with their results.
@@ -221,19 +221,18 @@ While using 1x1 pixel items for the game would mean a 8x8 playfield (32 item pai
 
 > SenseHat adaptation of the binary geek's 2048 matching game
 
-
 ![Screenshot-2048](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/_screenshots/scrot-2048.jpg)
 
-The playfield consists of 4x4 cells (represented by 2x2 LEDs on the SenseHat). Each cell might be empty or contain a number that is a power of 2. In each turn the player has one move to make in any of the four cardinal directions, and all the numbers of the whole playfield get pushed towards that direction until they hit the wall or each other, so they pile up on that wall the player has selected. If two cells with the **same value** hit each other, they are merged into one cell with the value summed up, so `4` + `4` become merged into a single `8`. Therefore the numbers will always remain a certain power of 2. After each move of the player a single `2` number is dropped randomly on one of the empty cells of the playfield.
-The aim of the player is to merge so many cells that the value eventually reaches `2048` _(thus the name of the game)_. To reach this high number a lot of different powers of 2 are required to be present on the playfield simultaneously, turning the playfield quite crowdy, blocking the way of further moves, therefore to reach 2048 might be quite challenging.
+The playfield consists of 4x4 cells (represented by 2x2 LEDs on the SenseHat). Each cell might be empty or contain a number that is a power of 2. In each turn the player has one move to make in any of the four cardinal directions, and all the numbers of the whole playfield get pushed towards that direction until they hit the wall or each other, so they pile up on that wall the player has selected. If two cells with the **same value** hit each other, they are merged into one cell with the value summed up, so `4` + `4` become merged into a single `8`. Therefore the numbers will always remain a certain power of 2. After each move of the player a single `2` number is dropped randomly on one of the empty cells of the playfield.  
+The aim of the player is to merge so many cells that the value eventually reaches `2048` _(thus the name of the game)_. To reach this high number a lot of different powers of 2 are required to be present on the playfield simultaneously, turning the playfield quite crowded, blocking the way of further moves, therefore to reach 2048 might be quite challenging.
 
 * If 2048 appears at any location of the playfield, the game is won with no further conditions.
 * If the whole playfield gets populated, there are no more empty cells, OR the player pushes `x` or `q` in pygame version or the `stick middle` in stick version, the game is lost/quit, the number of performed turns and the total earned score is displayed on the SenseHat.
 	* If the playfield gets full **after** the program drops the last `2`, the game is **not over**, as the player still has the chance to move and merge the numbers, freeing up some cells, where the program can drop further `2`'s.
 	* The game **is over** if there are no free cells after the player's move, therefore there is **nowhere** to drop the next `2`.
 
-These are the rules for the standard 2048 game that is being played on a PC display where the program is able to indicate the actual values of the cells. On the SenseHat there are 2x2 pixels available for each cell, so a different method had to be applied.
-The 2x2 pixels show a certain color for each value, although not randomly, but following the hue sequence of the H-S-V color space (the color of the rainbow), to give a hint which value is higher than the other. Red - Orange - Yellow - Green - Cyan - etc... This seems complex but You can get used to it quite easily, and because of using vivid colors, the SenseHat turns into an eyecandy.
+These are the rules for the standard 2048 game that is being played on a PC display where the program is able to indicate the actual values of the cells. On the SenseHat there are 2x2 pixels available for each cell, so a different method had to be applied.  
+The 2x2 pixels show a certain color for each value, although not randomly, but following the hue sequence of the H-S-V color space (the colors of the rainbow), to give a hint which value is higher than the other. Red - Orange - Yellow - Green - Cyan - etc... This seems complex but You can get used to it quite easily, and because of using vivid colors, the SenseHat turns into an eyecandy during gameplay.  
 A further aid in determining the value of a cell a hint is given: the four LEDs of a cell represent four bits, the lighter ones mean `1`, the darker ones mean `0`, and these give You a number, that shows which power of 2 the cell represents. The top 2 pixels are 8 and 4 , the bottom 2 pixels are 2 and 1. So for example if the 4 pixels of a cell are: top row: dark - light ; bottom row: light - dark, then this means 0-1-1-0, that is the binary representation of 6, so the cell value is 2^6, that is 64. Although as I said, You'll never start calculating the numbers as the colors are so obvious that You'll focus on merging two oranges into a yellow...
 
 **Hint for values:**
@@ -252,6 +251,46 @@ A further aid in determining the value of a cell a hint is given: the four LEDs 
 |        9 |   512 |   pink|   1-0-0-1 |
 |       10 |  1024 | l.gray|   1-0-1-0 |
 |       11 |  2048 |  white|   1-0-1-1 |
+
+
+### Four in a Row
+
+> Move colorful pixels to create complete rows of the same color to make all its members disappear.  
+> A classic turn-based match-up game that has lots of different variants.
+
+![Screenshot-Four_in_a_Row](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/_screenshots/scrot-Four_in_a_Row.jpg)
+
+There are random colored balls (represented by LED pixels in case of the SenseHat) displayed on the screen. In each turn the player has to grab exactly one ball and relocate it to somewhere else on the playfield so that consecutive rows of the same color are formed in any of the 8 directions (the cardinal four and four diagonal directions).  
+In case the length of a consecutive row reaches a minimum value (four by default, as the name of the game suggests), the whole consecutive row disappears.  
+The grabbed balls can be only moved to those empty locations that are not blocked/obscured by the other balls, so an area completely surrounded by balls is not accessible for other balls being outside, just for those on the inside.  
+Preparing more semi-finished rows of balls and completing the rows with one single "intersection" ball will cause that rows in all directions will disappear simultaneously, this is called a "combo" move and will cause extra bonus points for each ball elimintated.  
+For each player move when no balls are eliminated, extra random balls are dropped on the playfield as punishment.  
+The goal is to keep the game alive for as long as possible. In case the playfield gets filled by the dropped balls and there is no more free space to drop the next set of balls, the game is over, and the total collected score is displayed on the SenseHat.
+
+**Controls:**
+
+Initially You are in `Cruise Mode`. A white blinking cursor can be moved with the crsr keys (pygame version) or the SenseHat Stick (stick version). Clicking on a ball will grab it, and the game is changing to `Grab Mode`. Move around the cursor with the usual keys, and the actual path of the ball's planned move will be always displayed with dark gray color.  
+In `Grab Mode` You can either click (middle key in stick version or SPACE or ENTER in pygame version) on an empty location: The ball will move to that location, following the planned path, Your move is considered as done, and You get back to `Cruise Mode`. Clicking on an unaccessible place will not move the grabbed ball and You remain in `Grab Mode`.  
+If You want to return to `Cruise Mode` without making a move, go back to the grabbed ball and click on it again. In pygame version You can press 'x' or 'q' to quit the game immediately. Your score will be shown.
+
+**Complexity:**
+
+The complexity of the game can be increased/decreased by adjusting internal variables of the game: The number of different colors used at the same time, the number of similar balls that need to be aligned in line, and the number of new balls dropped on the field in case the move was unsuccessful.  
+There is no means of configuring these variables during gameplay, You have to edit them in the source code. Look for the beginning of the **`Game`** class:
+
+```python
+class Game :
+    def __init__(self) :
+        self.NumColor :int =6
+        self.FullRow :int =4
+        self.InjectBalls :int =3
+```
+
+|Variable   |Meaning                                            |Min|**Default**|Max|
+|-----------|---------------------------------------------------|---|-----------|---|
+|NumColor   |Number of different colors used in the game        | 3 |**6**      | 10|
+|FullRow    |Number of consecutive balls to match to remove them| 3 |**4**      | 6 |
+|InjectBalls|Number of new balls to be dropped on the playfield | 1 |**3**      | 5 |
 
 
 ---

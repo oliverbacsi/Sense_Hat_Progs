@@ -3,8 +3,7 @@
 # Four-in-a-row game for SenseHat
 #
 
-import random, time, pygame, math
-import pygame.locals as pgl
+import random, time, math
 try :
     from sense_hat import SenseHat
 except :
@@ -384,34 +383,43 @@ def fadeAway() -> None :
         time.sleep(0.1)
     s.clear()
 
-def handle_event(event) -> None :
-    """Handle pygame key hit events"""
-    if event.type != pgl.KEYDOWN : return
-    if event.key in [pgl.K_SPACE, pgl.K_RETURN] :
-        g.handleEnter()
-    else :
-        ek = str(event.key)
-        if ek not in ["113", "120", "273", "274", "275", "276"] : return
-        if ek in ["113", "120"] :
-            g.GameOver = True
-            return
-        # Switch off cursor
-        g.cE = False ; g.cS = False ; g.redrawScreen()
-        # Check if new position is still on the screen
-        dt = {"273":-8, "274":8, "276":-1, "275":1}[ek]
-        if g.cP+dt in range(64) : g.cP += dt
-        # If not in selection mode, then no more thing to do, otherwise check route
-        if g.selMode : g.findRoute()
-        # Force cursor
-        g.cE = True ; g.cS = True ; g.blinkCursor()
+def move_C(event) :
+    if event.action=="pressed" : g.handleEnter()
+def move_U(event) :
+    if event.action!="pressed" : return
+    g.cE = False ; g.cS = False ; g.redrawScreen()
+    if g.cP-8 in range(64) : g.cP -= 8
+    if g.selMode : g.findRoute()
+    g.cE = True ; g.cS = True ; g.blinkCursor()
+def move_D(event) :
+    if event.action!="pressed" : return
+    g.cE = False ; g.cS = False ; g.redrawScreen()
+    if g.cP+8 in range(64) : g.cP += 8
+    if g.selMode : g.findRoute()
+    g.cE = True ; g.cS = True ; g.blinkCursor()
+def move_L(event) :
+    if event.action!="pressed" : return
+    g.cE = False ; g.cS = False ; g.redrawScreen()
+    if g.cP-1 in range(64) : g.cP -= 1
+    if g.selMode : g.findRoute()
+    g.cE = True ; g.cS = True ; g.blinkCursor()
+def move_R(event) :
+    if event.action!="pressed" : return
+    g.cE = False ; g.cS = False ; g.redrawScreen()
+    if g.cP+1 in range(64) : g.cP += 1
+    if g.selMode : g.findRoute()
+    g.cE = True ; g.cS = True ; g.blinkCursor()
 
 
 #################### MAIN PART ####################
 
 s = SenseHat()
 s.clear()
-pygame.init()
-pygame.display.set_mode((400, 400))
+s.stick.direction_up = move_U
+s.stick.direction_down = move_D
+s.stick.direction_left = move_L
+s.stick.direction_right = move_R
+s.stick.direction_middle = move_C
 
 g = Game()
 g.dropNewBalls()
@@ -427,7 +435,6 @@ for cl in range(64) :
 g.cE = True
 
 while not g.GameOver :
-    for event in pygame.event.get() : handle_event(event)
     g.blinkCursor()
     time.sleep(0.15)
     if not g.cS : time.sleep(0.3)
@@ -437,4 +444,4 @@ fadeAway()
 s.show_message(f"GAME OVER. Points: {g.Points}")
 
 s.clear()
-pygame.quit()
+
