@@ -295,15 +295,10 @@ class Game :
 
 ---
 
-## TODO:
+# TODO:
 
-### Compass
+## DEBUG:
 
-Display a proper compass utilizing the magnetometer sensor of the Sense Hat.
-
-### Unruly game
-
-Most of the procedures are already inter-coded from the C++ version of the sgt-puzzles game, but it needs to be finished yet.
 
 ### Reversi game
 
@@ -313,15 +308,46 @@ Experienced a bug: Close to the end of the game most of the game field was alrea
 
 Time stamp of the last successful data should not be the timestamp of the download itself but of the (oldest?) report timestamp in the data files.
 
-### Four-in-a-row game
-
-Develop game engine and finish the game
-
-### Zuma
-
-Develop game engine and finish the game
-
 ### _sense_hat_ANSI
 
 This is a very lame library to subst the real sense_hat library,
 when no Raspberry is around and developing only on PC.
+
+
+
+## WRITE AS NEW:
+
+### Compass (gadget)
+
+Display a proper compass utilizing the magnetometer sensor of the Sense Hat.
+
+### Galaga (game)
+
+Sense Hat adaptation of the shoot-them-up arcade game Galaga
+
+### Klotski (game)
+
+Sense Hat adaptation of the Klotski logical board game
+
+### Swell Foop (game)
+
+Sense Hat adaptation of the Swell Foop logical board game
+
+### Tents (game)
+
+Conversion from C++ to Python of one of the sgt-puzzle games Tents.
+
+### Towers (game)
+
+Conversion from C++ to Python of one of the sgt-puzzle games Towers.
+
+### Unruly (game)
+
+Conversion from C++ to Python of one of the sgt-puzzle games Unruly.  
+Most of the procedures are already inter-coded, but it needs to be finished yet.
+
+### Zuma (game)
+
+Sense Hat adaptation of the well known DOS/Win ball game Zuma.  
+Develop game engine and finish the game.
+
