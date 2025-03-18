@@ -34,14 +34,27 @@ Simulate a flaming fire.
 ![Screenshot-PaintDrips](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/_screenshots/scrot-PaintDrips.jpg)
 
 Colorful paint is dripping on Your screen, spreading, mixing with the other color drips and fading away.
-- Paint Drips 1 uses a "traditional" linear programming, managing and handling all pixels separately by the code.
-- Paint Drips 2 treats the 2x2 screen elements as objects that can interfere with their neighbouring objects: They can send paint splashes to the neighbours when receiving a drip, as well as receive paint splashes from the neighbours and get the adjacent LEDs tinted to a certain extent with the neighbouring color.
+- **Paint Drips 1** uses a "traditional" linear programming, managing and handling all pixels separately by the code.
+- **Paint Drips 2** treats the 2x2 screen elements as objects that can interfere with their neighbouring objects: They can send paint splashes to the neighbours when receiving a drip, as well as receive paint splashes from the neighbours and get the adjacent LEDs tinted to a certain extent with the neighbouring color.
 
 ### Aquarium
 
 ![Screenshot-Aquarium](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/_screenshots/scrot-Aquarium.jpg)
 
 Simulate an aquarium with swimming fish, seaweed, and some bubbles. Inspiration taken from asciiaquarium terminal gadget.
+
+### Spotlights
+
+![Screenshot-Spotlights](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/_screenshots/scrot-Spotlights.jpg)
+
+Simulate three spotlights (a Red, a Green and a Blue one) that are swiping up & down & left & right on the screen, creating mixed colors where they meet.  
+The spotlights are the strongest at their center points, then fading away with the distance. The color mixing happens considering this property.
+
+**Controls:**
+
+* **Stick Up/Down:** Increase/Decrease spotlight diameter. (basically how soon the light is fading away from the spotlight center)
+* **Stick Right/Left:** Increase/Decrease animation speed. (the waiting time between two screen refreshes)
+* **Stick Middle:** Clear the screen and exit animation
 
 ### Air Data
 
@@ -92,7 +105,7 @@ For a detailed description what the values mean please visit NOAA home page.
 
 ![Screenshot-Maze](https://github.com/oliverbacsi/Sense_Hat_Progs/blob/main/_screenshots/scrot-Maze.jpg)
 
-**Game Rules**:
+**Game Rules:**
 
 Use the joystick (stick version) or the cursor keys (pygame version) to navigate inside the labyrinth.
 Unvisited rooms appear with blue walls while visited ones appear in green.
